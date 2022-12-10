@@ -14,8 +14,4 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        script: |
-          script: |
-          whoami
-          cd /var/www
-          ls 
+        script: 'cd /var/www/html/SGV && ./server_deploy.sh' 
