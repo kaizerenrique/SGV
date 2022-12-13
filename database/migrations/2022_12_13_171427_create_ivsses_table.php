@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('ivsses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('persona_id') // UNSIGNED BIG INT
+                    ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
+                    ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
+                    ->onDelete('SET NULL')
+                    ->onUpdate('cascade');
+            $table->string('pension')->nullable();
+            $table->string('ivss')->nullable();
             $table->timestamps();
         });
     }

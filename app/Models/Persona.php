@@ -24,4 +24,9 @@ class Persona extends Model
     {
         return $this->hasOne(Cne::class);
     }
+
+    public function ivss()
+    {
+        return $this->hasOne(Ivss::class);
+    }
 }

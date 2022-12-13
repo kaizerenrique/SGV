@@ -97,7 +97,7 @@ class Personascomponente extends Component
             'ivss' => 'nullable',
         ]);
 
-        $resulado = Persona::create([
+        $persona = Persona::create([
             'nacionalidad' => $resul['nac'],
             'cedula' => $resul['cedula'],
             'nombres' => $resul['nombres'],
@@ -106,13 +106,20 @@ class Personascomponente extends Component
             'sexo' => $resul['sexo'],
             'status' => $resul['status'],
             'jefedefamilia' => $resul['jefedefamilia'],
-        ])->cne()->create([
+        ]);
+        
+        $cne = $persona->cne()->create([
             'inscrito' => $resul['inscrito'],
             'cvestado' => $resul['cvestado'],
             'cvmunicipio' => $resul['cvmunicipio'],
             'cvparroquia' => $resul['cvparroquia'],
             'centro' => $resul['centro'],
             'direccion' => $resul['direccion']
+        ]);
+
+        $ivss = $persona->ivss()->create([
+            'pension' => $resul['pension'],
+            'ivss' => $resul['ivss']
         ]);
 
         $this->modalPersona = false;        
