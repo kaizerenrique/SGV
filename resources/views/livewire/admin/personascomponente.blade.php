@@ -100,6 +100,31 @@
                 <x-jet-label for="jefedefamilia" value="{{ __('Jefe de familia ') }}" />
                 <x-jet-input id="jefedefamilia" type="checkbox" class="mt-1 mr-2" wire:model.defer="jefedefamilia"/> Seleccionar si es jefe de familia 
             </div>
+
+            <div class="col-span-1 sm:col-span-1">
+                <x-jet-label for="codigo_operador" value="{{ __('Operador') }}" />
+                    <select name="codigo_operador" id="codigo_operador" wire:model.defer="codigo_operador" class="mt-1 block w-full"> 
+                        <option value="" selected>Selecciona el Operador</option>                                                                         
+                        <option value="416">416</option>
+                        <option value="426">426</option>
+                        <option value="414">414</option>
+                        <option value="424">424</option>
+                        <option value="412">412</option>
+                    </select> 
+                <x-jet-input-error for="codigo_operador" class="mt-2" />                   
+            </div> 
+            
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="nrotelefono" value="{{ __('Numero de Teléfono ') }}" />
+                <x-jet-input id=">nrotelefono" type="text" class="mt-1 block w-full" wire:model.defer="nrotelefono"/>
+                <x-jet-input-error for="nrotelefono" class="mt-2" />
+            </div>
+
+            <div class="col-span-1">
+                <x-jet-label for="whatsapp" value="{{ __('Whatsapp') }}" />
+                <x-jet-input id="whatsapp" type="checkbox" class="mt-1 mr-2" wire:model.defer="whatsapp"/> 
+            </div> 
+
         </div>
     </x-slot>
 

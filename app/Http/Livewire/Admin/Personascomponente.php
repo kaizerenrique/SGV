@@ -21,6 +21,9 @@ class Personascomponente extends Component
     public $pension , $ivss;
 
     public $sexo, $status, $jefedefamilia;
+
+    //datos de telefono para contacto
+    public $codigo_internacional , $codigo_operador , $nrotelefono , $whatsapp;
     
     //modals
     public $modalCedula = false;
@@ -70,6 +73,10 @@ class Personascomponente extends Component
             $this->pension = $info['pension'];
             $this->ivss = $info['ivss'];
 
+            $this->reset(['codigo_operador']);
+            $this->reset(['nrotelefono']);
+            $this->reset(['whatsapp']);
+
             $this->modalPersona = true;
         }
         
@@ -95,6 +102,10 @@ class Personascomponente extends Component
             'direccion' => 'nullable',
             'pension' => 'nullable',
             'ivss' => 'nullable',
+            'codigo_operador' => 'nullable',
+            'nrotelefono' => 'nullable|string|digits_between:6,8',
+            'whatsapp' => 'nullable',
+
         ]);
 
         $persona = Persona::create([
@@ -120,6 +131,13 @@ class Personascomponente extends Component
         $ivss = $persona->ivss()->create([
             'pension' => $resul['pension'],
             'ivss' => $resul['ivss']
+        ]);
+
+        $telefono = $persona->telefono()->create([
+            'codigo_internacional' => '58',
+            'codigo_operador' => $resul['codigo_operador'],
+            'nrotelefono' => $resul['nrotelefono'],
+            'whatsapp' => $resul['whatsapp'],
         ]);
 
         $this->modalPersona = false;        

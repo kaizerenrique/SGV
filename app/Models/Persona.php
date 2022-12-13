@@ -29,4 +29,9 @@ class Persona extends Model
     {
         return $this->hasOne(Ivss::class);
     }
+
+    public function telefono()
+    {
+        return $this->hasOne(Phone::class);
+    }
 }
