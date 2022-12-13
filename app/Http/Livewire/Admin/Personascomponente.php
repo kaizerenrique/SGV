@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\OperacionesCedula;
+use App\Models\Persona;
 
 class Personascomponente extends Component
 {
@@ -13,6 +14,13 @@ class Personascomponente extends Component
 
     //variables
     public $nac , $ci, $fecha_nacimiento;
+    public $nombres , $apellidos;
+    //variables del cne
+    public $inscrito , $cvestado , $cvmunicipio , $cvparroquia , $centro , $direccion;
+    //variables ivss
+    public $pension , $ivss;
+
+    public $sexo, $status, $jefedefamilia;
     
     //modals
     public $modalCedula = false;
@@ -39,20 +47,79 @@ class Personascomponente extends Component
 
     public function comprobarCedula()
     {
-        $resultado = $this->validate();      
-
+        $this->validate();
         $info = $this->consultarpersona($this->nac, $this->ci, $this->fecha_nacimiento);
+        
+        if ($info == false) {
+            
 
-        dd($info);
+        } else {
+            $this->modalCedula = false;
+        
+            $this->nac = $info['persona']['nacionalidad'];
+            $this->cedula = $info['persona']['cedula'];
+            $this->nombres = $info['persona']['nombres'];
+            $this->apellidos = $info['persona']['apellidos'];
+            $this->fecha_nacimiento = $this->fecha_nacimiento;
+            $this->inscrito = $info['cne']['inscrito'];
+            $this->cvestado = $info['cne']['cvestado'];
+            $this->cvmunicipio = $info['cne']['cvmunicipio'];
+            $this->cvparroquia = $info['cne']['cvparroquia'];
+            $this->centro = $info['cne']['centro'];
+            $this->direccion = $info['cne']['direccion'];
+            $this->pension = $info['pension'];
+            $this->ivss = $info['ivss'];
+
+            $this->modalPersona = true;
+        }
+        
+        
+    }
+
+    public function guardarpersona()
+    {
+        $resul = $this->validate([
+            'nac' => 'required',
+            'cedula' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'fecha_nacimiento' => 'nullable|date',
+            'sexo' => 'nullable',
+            'status' => 'nullable',
+            'jefedefamilia' => 'nullable',
+            'inscrito' => 'nullable',
+            'cvestado' => 'nullable',
+            'cvmunicipio' => 'nullable',
+            'cvparroquia' => 'nullable',
+            'centro' => 'nullable',
+            'direccion' => 'nullable',
+            'pension' => 'nullable',
+            'ivss' => 'nullable',
+        ]);
+
+        $resulado = Persona::create([
+            'nacionalidad' => $resul['nac'],
+            'cedula' => $resul['cedula'],
+            'nombres' => $resul['nombres'],
+            'apellidos' => $resul['apellidos'],
+            'fnacimiento' => $resul['fecha_nacimiento'],
+            'sexo' => $resul['sexo'],
+            'status' => $resul['status'],
+            'jefedefamilia' => $resul['jefedefamilia'],
+        ])->cne()->create([
+            'inscrito' => $resul['inscrito'],
+            'cvestado' => $resul['cvestado'],
+            'cvmunicipio' => $resul['cvmunicipio'],
+            'cvparroquia' => $resul['cvparroquia'],
+            'centro' => $resul['centro'],
+            'direccion' => $resul['direccion']
+        ]);
+
+        $this->modalPersona = false;        
     }
 
     public function render()
     {
-        //$nac = 'V';
-        //$ci = '20124379'; 
-        //$info = $this->consultarpersona($nac, $ci);
-
-        //dd($info);
 
         return view('livewire.admin.personascomponente');
     }

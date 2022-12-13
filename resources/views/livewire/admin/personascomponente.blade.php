@@ -11,14 +11,14 @@
             </div>
         </div>        
     </div>
-<!-- Inicio del Modal para Editar datos de usuario -->
+<!-- Inicio del Modal para comprobar cedula -->
 <x-jet-dialog-modal wire:model="modalCedula">
     <x-slot name="title">
         {{ __('Registro') }}
     </x-slot>
     <x-slot name="content">             
-        <div class="grid grid-cols-4 gap-4 text-sm text-gray-600">                
-            <div class="col-span-2 sm:col-span-1">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">                
+            <div class="col-span-2 sm:col-span-4">
                 <x-jet-label for="nacionalidad" value="{{ __('Nacionalidad') }}" />
                 <select name="nac" id="nac" wire:model.defer="nac" class="mt-1 block w-full"> 
                     <option value="" selected>Selecciona la Nacionalidad</option>                                                                         
@@ -32,7 +32,7 @@
                 <x-jet-input id="ci" type="text" class="mt-1 block w-full" wire:model.defer="ci" />
                 <x-jet-input-error for="ci" class="mt-2" />
             </div>
-            <div class="col-span-4 sm:col-span-2">
+            <div class="col-span-2 sm:col-span-2">
                 <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
                 <x-jet-input id="fecha_nacimiento" type="date" class="mt-1 block w-full" wire:model.defer="fecha_nacimiento" />
                 <x-jet-input-error for="fecha_nacimiento" class="mt-2" />
@@ -49,5 +49,69 @@
         </x-jet-danger-button>            
     </x-slot>
 </x-jet-dialog-modal>
-<!-- Fin del Modal para Editar datos de usuario -->
+<!-- Fin del Modal para comprobar cedula -->
+<!-- Agregar Persona Confirmation Modal -->
+<x-jet-dialog-modal wire:model="modalPersona">
+    <x-slot name="title">
+        {{'Registrar' }}
+    </x-slot>
+
+    <x-slot name="content">                
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="name" value="{{ __('Nombre') }}" />
+                <x-jet-input id="nombres" type="text" class="mt-1 block w-full" wire:model.defer="nombres"/>
+                <x-jet-input-error for="nombres" class="mt-2" />
+            </div>
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="apellido" value="{{ __('Apellido') }}" />
+                <x-jet-input id="apellidos" type="text" class="mt-1 block w-full" wire:model.defer="apellidos"/>
+                <x-jet-input-error for="apellidos" class="mt-2" />
+            </div>
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="nac" value="{{ __('Nacionalidad') }}" />
+                <x-jet-input id="nac" name="nac" type="text" class="mt-1 block w-full" wire:model.defer="nac" disabled/>
+                <x-jet-input-error for=">nac" class="mt-2" />
+            </div>                    
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="cedula" value="{{ __('Cedula') }}" />
+                <x-jet-input id="ci" name="ci" type="text" class="mt-1 block w-full" wire:model.defer="ci" disabled/>
+                <x-jet-input-error for="ci" class="mt-2" />
+            </div>
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="fnacimiento" value="{{ __('Fecha de Nacimiento') }}" />
+                <x-jet-input id="fecha_nacimiento" type="date" class="mt-1 block w-full" wire:model.defer="fecha_nacimiento" />
+                <x-jet-input-error for="fecha_nacimiento" class="mt-2" />
+            </div>
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="campsexo" value="{{ __('Sexo') }}" />
+                    <select name="sexo" id="sexo" wire:model.defer="sexo" class="mt-1 block w-full"> 
+                        <option value="" selected>Selecciona el Sexo</option>                                                                         
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                    </select> 
+                <x-jet-input-error for="sexo" class="mt-2" />                   
+            </div>
+            <div class="col-span-2">
+                <x-jet-label for="status" value="{{ __('Estatus') }}" />
+                <x-jet-input id="status" type="checkbox" class="mt-1 mr-2" wire:model.defer="status"/> Seleccionar en caso de estatus activo                 
+            </div>
+            <div class="col-span-2">
+                <x-jet-label for="jefedefamilia" value="{{ __('Jefe de familia ') }}" />
+                <x-jet-input id="jefedefamilia" type="checkbox" class="mt-1 mr-2" wire:model.defer="jefedefamilia"/> Seleccionar si es jefe de familia 
+            </div>
+        </div>
+    </x-slot>
+
+    <x-slot name="footer">
+        <x-jet-secondary-button wire:click="$toggle('modalPersona', false)" wire:loading.attr="disabled">
+            {{ __('Cancelar') }}
+        </x-jet-secondary-button>
+        <x-jet-danger-button class="ml-3" wire:click="guardarpersona()" wire:loading.attr="disabled">
+            {{ __('Guardar') }}
+        </x-jet-danger-button>
+    </x-slot>
+</x-jet-dialog-modal>
+
+<!-- Inicio del Modal para mostrar el codigo -->
 </div>
