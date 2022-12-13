@@ -3,35 +3,54 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use App\Traits\OperacionesCedula;
 
 class Personascomponente extends Component
 {
+    use WithPagination;
     use OperacionesCedula;
-    use WithFileUploads;
 
-    public $nac , $ci;   
+    //variables
+    public $nac , $ci, $fecha_nacimiento;
+    
+    //modals
+    public $modalCedula = false;
+    public $modalPersona = false;
 
-    public $file;
-
- 
-
-    public function save()
+    public function agregarpersona()
     {
-        $prueba = $this->validate([
-            'file' => 'file', // 1MB Max
-        ]);
-        
-        dd($prueba);
-        //$this->photo->store('photos');
+        $this->reset(['nac']);
+        $this->reset(['ci']);
+        $this->reset(['fecha_nacimiento']);
+        $this->modalCedula = true;
+    }
+
+    protected function rules()
+    {
+        if ($modalCedula = true) {
+            return [
+                'nac' => 'required',
+                'ci' => 'required|numeric|integer|digits_between:6,8',
+                'fecha_nacimiento' => 'nullable|date'
+            ];
+        }        
+    }
+
+    public function comprobarCedula()
+    {
+        $resultado = $this->validate();      
+
+        $info = $this->consultarpersona($this->nac, $this->ci, $this->fecha_nacimiento);
+
+        dd($info);
     }
 
     public function render()
     {
-        $nac = 'V';
-        $ci = '20124379'; 
-        $info = $this->consultarpersona($nac, $ci);
+        //$nac = 'V';
+        //$ci = '20124379'; 
+        //$info = $this->consultarpersona($nac, $ci);
 
         //dd($info);
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddf4a68f670d8bfcf8cca3d03b008cc5",
+    "content-hash": "5906e18bfbf79d0b11e6075e1a5d6670",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1132,6 +1132,47 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
+        },
+        {
+            "name": "kaizerenrique/cedulavenezuela",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kaizerenrique/cedulavenezuela.git",
+                "reference": "7c4a79023d5395db079e8b24e64df2106603673f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kaizerenrique/cedulavenezuela/zipball/7c4a79023d5395db079e8b24e64df2106603673f",
+                "reference": "7c4a79023d5395db079e8b24e64df2106603673f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kaizerenrique\\Cedulavenezuela\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "kaizerenrique",
+                    "email": "kayserenrique@gmail.com"
+                }
+            ],
+            "description": "consulta la informacion asociada a un numero de cedula en el cne y el ivss",
+            "support": {
+                "issues": "https://github.com/kaizerenrique/cedulavenezuela/issues",
+                "source": "https://github.com/kaizerenrique/cedulavenezuela/tree/main"
+            },
+            "time": "2022-11-09T22:21:00+00:00"
         },
         {
             "name": "laravel/fortify",
@@ -8601,7 +8642,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "kaizerenrique/cedulavenezuela": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
