@@ -61,7 +61,7 @@
                         <td class="rounded border px-4 py-2">{{$persona->apellidos}}</td> 
                         <td class="rounded border px-4 py-2">
                             @if ($persona->fnacimiento)
-                                {{ \Carbon\Carbon::parse($persona->fnacimiento)->diffForHumans()}} 
+                                {{ \Carbon\Carbon::parse($persona->fnacimiento)->age}} 
                             @else
                                 <p>No registrado</p>
                             @endif                             
@@ -94,25 +94,22 @@
     </div>
 
 
+<!-- Inicio del Modal para mensajes y alertas  -->
+    <x-jet-dialog-modal wire:model="modalMensaje">
+        <x-slot name="title">
+            {{$titulo}} 
+        </x-slot>
 
+        <x-slot name="content">            
+            {{$mensaje}}            
+        </x-slot>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalMensaje', false)" wire:loading.attr="disabled">
+                {{ __('Aceptar') }}
+            </x-jet-secondary-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 <!-- Inicio del Modal para comprobar cedula -->
 <x-jet-dialog-modal wire:model="modalCedula">
     <x-slot name="title">

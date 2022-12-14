@@ -30,6 +30,8 @@ class Personascomponente extends Component
     //modals
     public $modalCedula = false;
     public $modalPersona = false;
+    public $modalMensaje = false;
+    public $titulo , $mensaje;
 
     // seccion para agregar persona    
     public function agregarpersona()
@@ -57,7 +59,10 @@ class Personascomponente extends Component
         $info = $this->consultarpersona($this->nac, $this->ci, $this->fecha_nacimiento);
         
         if ($info == false) {
-            // colocar mensaje que notifica que persona ya esta registrado
+            $this->modalCedula = false;
+            $this->titulo = "¡Alerta!";
+            $this->mensaje = "El numero de cedula ingresado ya se encuentra registrado.";
+            $this->modalMensaje = true;
         } else {
             $this->modalCedula = false;
         
