@@ -46,7 +46,10 @@
                         <div class="flex items-center">CNE</div>
                     </th>
                     <th class="px-4 py-2">
-                        <div class="flex items-center">Pensionado</div>
+                        <div class="flex items-center">Pension IVSS</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">IVSS</div>
                     </th>
                 </tr>
             </thead>
@@ -80,6 +83,7 @@
                         </td>
                         <td class="rounded border px-4 py-2">{{$persona->cne->inscrito}}</td>
                         <td class="rounded border px-4 py-2">{{$persona->ivss->pension}}</td>
+                        <td class="rounded border px-4 py-2">{{$persona->ivss->ivss}}</td>
                     </tr>
                 @endforeach
             </tbody>
