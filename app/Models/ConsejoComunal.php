@@ -31,4 +31,10 @@ class ConsejoComunal extends Model
     {
         return $this->belongsTo(Comuna::class);
     }
+
+    //clap pertenecientes al consejo comunal
+    public function claps()
+    {
+        return $this->hasMany(Clap::class);
+    }
 }
