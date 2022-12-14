@@ -1,7 +1,7 @@
-<div>
+<div class="p-2 bg-white border-b border-gray-200">
     <div class="mt-4 text-2xl">
         <div class="mt-4 text-2xl flex justify-between">
-            <div>
+            <div class="mt-4 mb-4 text-2xl flex justify-between">
                 Registrar perfiles
             </div>
             <div class="mr-2">                
@@ -11,6 +11,104 @@
             </div>
         </div>        
     </div>
+
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">        
+        <div class="flex justify-between">            
+            <div>
+                <input wire:model="buscar" type="search" placeholder="Buscar" class="shadow appearence-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-indigo-500" name="">
+            </div>            
+        </div>
+        <table class="table-auto w-full mt-6">
+            <thead>
+                <tr class="bg-indigo-500 text-white">
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Cedula</div>
+                    </th>                  
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Nombres</div>
+                    </th>                 
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Apellidos</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Edad</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Sexo</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Activo</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Jefe de Familia</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">CNE</div>
+                    </th>
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Pensionado</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($personas as $persona)
+                    <tr>
+                        <td class="rounded border px-4 py-2">{{$persona->nacionalidad}}-{{$persona->cedula}}</td>                                        
+                        <td class="rounded border px-4 py-2">{{$persona->nombres}}</td>
+                        <td class="rounded border px-4 py-2">{{$persona->apellidos}}</td> 
+                        <td class="rounded border px-4 py-2">
+                            @if ($persona->fnacimiento)
+                                {{ \Carbon\Carbon::parse($persona->fnacimiento)->diffForHumans()}} 
+                            @else
+                                <p>No registrado</p>
+                            @endif                             
+                        </td>
+                        <td class="rounded border px-4 py-2">{{$persona->sexo}}</td>
+                        <td class="rounded border px-4 py-2">
+                            @if ($persona->status == 1)
+                                <p>SI</p>
+                            @else
+                                <p>No</p>
+                            @endif
+                        </td> 
+                        <td class="rounded border px-4 py-2">
+                            @if ($persona->jefedefamilia == 1)
+                                <p>SI</p>
+                            @else
+                                <p>No</p>
+                            @endif
+                        </td>
+                        <td class="rounded border px-4 py-2">{{$persona->cne->inscrito}}</td>
+                        <td class="rounded border px-4 py-2">{{$persona->ivss->pension}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4">
+        {{$personas->links()}}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Inicio del Modal para comprobar cedula -->
 <x-jet-dialog-modal wire:model="modalCedula">
     <x-slot name="title">

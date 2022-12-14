@@ -24,11 +24,14 @@ class Personascomponente extends Component
 
     //datos de telefono para contacto
     public $codigo_internacional , $codigo_operador , $nrotelefono , $whatsapp;
+
+    public $buscar;
     
     //modals
     public $modalCedula = false;
     public $modalPersona = false;
 
+    // seccion para agregar persona    
     public function agregarpersona()
     {
         $this->reset(['nac']);
@@ -54,8 +57,7 @@ class Personascomponente extends Component
         $info = $this->consultarpersona($this->nac, $this->ci, $this->fecha_nacimiento);
         
         if ($info == false) {
-            
-
+            // colocar mensaje que notifica que persona ya esta registrado
         } else {
             $this->modalCedula = false;
         
@@ -133,19 +135,43 @@ class Personascomponente extends Component
             'ivss' => $resul['ivss']
         ]);
 
-        $telefono = $persona->telefono()->create([
-            'codigo_internacional' => '58',
-            'codigo_operador' => $resul['codigo_operador'],
-            'nrotelefono' => $resul['nrotelefono'],
-            'whatsapp' => $resul['whatsapp'],
-        ]);
+        if (!empty($resul['nrotelefono'])) {
+            $telefono = $persona->telefono()->create([
+                'codigo_internacional' => '58',
+                'codigo_operador' => $resul['codigo_operador'],
+                'nrotelefono' => $resul['nrotelefono'],
+                'whatsapp' => $resul['whatsapp'],
+            ]);
+        } 
+        
+
+        
 
         $this->modalPersona = false;        
     }
 
+    //componentes para la tabla de personas
+    protected $queryString = [
+        'buscar' => ['except' => '']
+    ];
+
     public function render()
     {
 
-        return view('livewire.admin.personascomponente');
+        $personas = Persona::where('cedula', 'like', '%'.$this->buscar . '%')  //buscar por cedula 
+                      ->orWhere('nombres', 'like', '%'.$this->buscar . '%') //buscar por nombres
+                      ->orWhere('apellidos', 'like', '%'.$this->buscar . '%') //buscar por apellidos
+                      ->orderBy('id','desc') //ordenar de forma decendente
+                      ->paginate(10); //paginacion
+
+        return view('livewire.admin.personascomponente',[
+            'personas' => $personas,
+        ]);
+    }
+
+    //Actualizar tabla para corregir falla de busqueda
+    public function updatingBuscar()
+    {
+        $this->resetPage();
     }
 }
