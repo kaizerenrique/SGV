@@ -20,18 +20,27 @@ class Persona extends Model
         'jefedefamilia',
     ];
 
+    //informacion electoral
     public function cne()
     {
         return $this->hasOne(Cne::class);
     }
 
+    //ivss informacion de pension y registro
     public function ivss()
     {
         return $this->hasOne(Ivss::class);
     }
 
+    //numero de telefono celular
     public function telefono()
     {
         return $this->hasOne(Phone::class);
+    }
+
+    //familia a la que pertenece
+    public function familia()
+    {
+        return $this->belongsTo(Familia::class);
     }
 }
