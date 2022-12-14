@@ -17,4 +17,9 @@ class Municipio extends Model
     {
         return $this->belongsTo(Estado::class);
     }
+
+    public function paroquias()
+    {
+        return $this->hasMany(Parroquia::class);
+    }
 }
