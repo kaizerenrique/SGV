@@ -22,4 +22,16 @@ class Municipio extends Model
     {
         return $this->hasMany(Parroquia::class);
     }
+
+    //comunas registradas por municipio 
+    public function comunas()
+    {
+        return $this->hasMany(Comuna::class);
+    }
+
+    //consejos comunales por municipio
+    public function consejoscomunales()
+    {
+        return $this->hasMany(ConsejoComunal::class);
+    }
 }

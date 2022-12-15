@@ -20,7 +20,7 @@ class Direccion extends Model
     //consejo comunal al que pertenece la direccion
     public function consejocomunal()
     {
-        return $this->belongsTo(ConsejoComunal::class);
+        return $this->belongsTo(ConsejoComunal::class, 'consejo_comunal_id');
     }
 
     //el cap al que pertenece esta direccion

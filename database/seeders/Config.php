@@ -4,14 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use App\Models\User;
 use App\Models\Estado;
 use App\Models\Municipio;
 use App\Models\Parroquia;
 use App\Models\Ciudade;
 use App\Models\Banco;
+use App\Models\Comuna;
+use App\Models\ConsejoComunal;
+use App\Models\Clap;
+use App\Models\Direccion;
+use Illuminate\Support\Str;
 use File;
 
 class Config extends Seeder
@@ -23,6 +25,7 @@ class Config extends Seeder
      */
     public function run()
     {
+        //estados de venezuela
         $json1 = File::get("database/data/01_estados.json");
         $data = json_decode($json1);
         foreach ($data as $obj) {
@@ -33,6 +36,7 @@ class Config extends Seeder
             ));
         };
 
+        //municipios de venezuela
         $json2 = File::get("database/data/02_municipios.json");
         $data = json_decode($json2);
         foreach ($data as $obj) {
@@ -43,6 +47,7 @@ class Config extends Seeder
             ));
         };
 
+        //parroquias de venezuela
         $json3 = File::get("database/data/03_parroquias.json");
         $data = json_decode($json3);
         foreach ($data as $obj) {
@@ -53,6 +58,7 @@ class Config extends Seeder
             ));
         };
 
+        //ciudades de venezuela
         $json4 = File::get("database/data/04_ciudades.json");
         $data = json_decode($json4);
         foreach ($data as $obj) {
@@ -64,6 +70,7 @@ class Config extends Seeder
             ));
         };
 
+        //bancos de venezuela
         $json5 = File::get("database/data/05_bancos.json");
         $data = json_decode($json5);
         foreach ($data as $obj) {
@@ -74,20 +81,55 @@ class Config extends Seeder
             ));
         };
 
-        //configuracion de roles y permisos
-        //Roles del Sistema
-        $admin = Role::create(['name' => 'Administrador']); //Administrador del Sistema 
-        $user = Role::create(['name' => 'Usuario']); //Usuario Final
+        //comuna
+        $comuna = Comuna::create([
+            'nombre' => 'Amor Supremo Corazon de Acero',
+            'codigoSitur' => '01-02-03-040-0506',
+            'estado_id' => 6,
+            'municipio_id' => 66,
+            'parroquia_id' => 214,
+            'direccion' => 'Unare 2 sector 2',
+            'referencia'=> 'Andrés Bello',
+            'slug' => 'amor-supremo-corazon-de-acero',
+        ]);
 
-        //permisos
-        Permission::create(['name' => 'menuAdmin'])->syncRoles([$admin]);
+        //consejo comunal
+        $consejocomunal = ConsejoComunal::create([
+            'name' => 'CONSEJO COMUNAL UNARE II SECTOR II LA PLACITA UD 292',
+            'codigoSitur' => '07-01-06-001-0096',
+            'comuna_id' => $comuna->id,
+            'estado_id' => 6,
+            'municipio_id' => 66,
+            'parroquia_id' => 214,
+            'sector' => 'UNARE 2',
+            'comunidad' => 'LA PLACITA',
+            'direccion' => 'Unare 2 sector 2',
+            'referencia' => 'Colegio Fe Y Alegría Jesus Soto',
+            'slug' => 'consejo-comunal-unare-ii-sector-ii-la-placita-ud-292',
+            'elegido' => '2021-07-09',   
+            'vence' => '2023-07-09' 
+        ]);
 
-        //usuario
-        User::create([
-            'name' => 'Oliver Gomez',
-            'email' => 'kayserenrique@gmail.com',
-            'password' => bcrypt('123456789'),
-            'email_verified_at' => '2022-02-26 20:48:29'
-        ])->assignRole('Administrador');
+        //clap
+        $clap = Clap::create([
+            'name' => 'PACHAMAMA',
+            'codigo' => 'CLAPS_BOL_070106_00027',
+            'consejo_comunal_id' => $consejocomunal->id,
+        ]);        
+
+        $json6 = File::get("database/data/06_direcciones.json");
+        $data = json_decode($json6);
+        foreach ($data as $obj) {
+            Direccion::create(array(
+                'direccion' => $obj->direccion,
+                'codigo' => Str::random(10),
+                'tipo' => $obj->tipo,
+                'consejo_comunal_id' => $consejocomunal->id,
+                'clap_id' => $clap->id,
+                'latitud' => $obj->latitud,
+                'longitud' => $obj->longitud
+            ));
+        };
+        
     }
 }

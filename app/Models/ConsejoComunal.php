@@ -11,7 +11,6 @@ class ConsejoComunal extends Model
 
     protected $fillable = [
         'name',
-        'rif',
         'codigoSitur',
         'comuna_id',
         'estado_id',
@@ -36,5 +35,26 @@ class ConsejoComunal extends Model
     public function claps()
     {
         return $this->hasMany(Clap::class);
+    }
+
+    public function direcciones()
+    {
+        return $this->hasMany(Direccion::class);
+    }
+
+    //geograficos
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class);
+    }
+
+    public function parroquia()
+    {
+        return $this->belongsTo(Parroquia::class);
     }
 }

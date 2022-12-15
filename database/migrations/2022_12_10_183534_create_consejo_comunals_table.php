@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('consejo_comunals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('rif');
             $table->string('codigoSitur'); 
             $table->foreignId('comuna_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO

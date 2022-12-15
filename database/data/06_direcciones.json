@@ -1,0 +1,200 @@
+[
+    {
+        "direccion": "Vereda 1",
+        "tipo": "Vereda",
+        "latitud": "8.277428",
+        "longitud": "-62.764887"
+    },
+    {
+        "direccion": "Vereda 2",
+        "tipo": "Vereda",
+        "latitud": "8.277865",
+        "longitud": "-62.764793"
+    },
+    {
+        "direccion": "Vereda 3",
+        "tipo": "Vereda",
+        "latitud": "8.277061",
+        "longitud": "-62.764767"
+    },
+    {
+        "direccion": "Vereda 4",
+        "tipo": "Vereda",
+        "latitud": "8.277588",
+        "longitud": "-62.764370"
+    },
+    {
+        "direccion": "Vereda 5",
+        "tipo": "Vereda",
+        "latitud": "8.276366",
+        "longitud": "-62.764312"
+    },
+    {
+        "direccion": "Vereda 6",
+        "tipo": "Vereda",
+        "latitud": "8.277859",
+        "longitud": "-62.764034"
+    },
+    {
+        "direccion": "Vereda 6",
+        "tipo": "Vereda",
+        "latitud": "8.277859",
+        "longitud": "-62.764034"
+    },
+    {
+        "direccion": "Vereda 7",
+        "tipo": "Vereda",
+        "latitud": "8.275711",
+        "longitud": "-62.764136"
+    },
+    {
+        "direccion": "Vereda 8",
+        "tipo": "Vereda",
+        "latitud": "8.277874",
+        "longitud": "-62.763580"
+    },
+    {
+        "direccion": "Vereda 9",
+        "tipo": "Vereda",
+        "latitud": "8.275700",
+        "longitud": "-62.764155"
+    },
+    {
+        "direccion": "Vereda 10",
+        "tipo": "Vereda",
+        "latitud": "8.278183",
+        "longitud": "-62.762748"
+    },
+    {
+        "direccion": "Vereda 11",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 11",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 12",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 13",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 15",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 17",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 18",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 19",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 20",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 22",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 24",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 26",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Vereda 28",
+        "tipo": "Vereda",
+        "latitud": "No definido",
+        "longitud": "No definido"
+    },
+    {
+        "direccion": "Calle 2",
+        "tipo": "Calle",
+        "latitud": "8.277758",
+        "longitud": "-62.763262"
+    },
+    {
+        "direccion": "Calle 4",
+        "tipo": "Calle",
+        "latitud": "8.276749",
+        "longitud": "-62.764403"
+    },
+    {
+        "direccion": "Calle 6",
+        "tipo": "Calle",
+        "latitud": "8.276682",
+        "longitud": "-62.762770"
+    },
+    {
+        "direccion": "Calle 9",
+        "tipo": "Calle",
+        "latitud": "8.276945",
+        "longitud": "-62.764045"
+    },
+    {
+        "direccion": "Calle 11",
+        "tipo": "Calle",
+        "latitud": "8.278169",
+        "longitud": "-62.763210"
+    },
+    {
+        "direccion": "Calle 13",
+        "tipo": "Calle",
+        "latitud": "8.277398",
+        "longitud": "-62.761975"
+    },
+    {
+        "direccion": "Avenida 1",
+        "tipo": "Avenida",
+        "latitud": "8.278563",
+        "longitud": "-62.763348"
+    },
+    {
+        "direccion": "Avenida 2",
+        "tipo": "Avenida",
+        "latitud": "8.275850",
+        "longitud": "-62.762610"
+    },
+    {
+        "direccion": "Avenida Norte Sur 3",
+        "tipo": "Avenida",
+        "latitud": "8.276593",
+        "longitud": "-62.764881"
+    }
+]

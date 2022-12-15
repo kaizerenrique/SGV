@@ -18,4 +18,16 @@ class Estado extends Model
     {
         return $this->hasMany(Municipio::class);
     }
+
+    //comunas registradas por estado 
+    public function comunas()
+    {
+        return $this->hasMany(Comuna::class);
+    }
+
+    //consejos comunales por estado
+    public function consejoscomunales()
+    {
+        return $this->hasMany(ConsejoComunal::class);
+    }
 }

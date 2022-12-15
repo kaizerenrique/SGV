@@ -17,4 +17,16 @@ class Parroquia extends Model
     {
         return $this->belongsTo(Municipio::class);
     }
+
+    //comunas registradas por parroquia 
+    public function comunas()
+    {
+        return $this->hasMany(Comuna::class);
+    }
+
+    //consejos comunales por parroquia
+    public function consejoscomunales()
+    {
+        return $this->hasMany(ConsejoComunal::class);
+    }
 }
