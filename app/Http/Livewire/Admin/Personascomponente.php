@@ -6,6 +6,11 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\OperacionesCedula;
 use App\Models\Persona;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use App\Mail\RegistroUsuarioMailable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class Personascomponente extends Component
 {
@@ -25,13 +30,18 @@ class Personascomponente extends Component
     //datos de telefono para contacto
     public $codigo_internacional , $codigo_operador , $nrotelefono , $whatsapp;
 
+    //barra de busqueda
     public $buscar;
+
+    //usuario para persona
+    public $email , $rol, $idpersona;
     
     //modals
     public $modalCedula = false;
     public $modalPersona = false;
     public $modalMensaje = false;
     public $titulo , $mensaje;
+    public $modalNuevoUser = false;
 
     // seccion para agregar persona    
     public function agregarpersona()
@@ -147,12 +157,67 @@ class Personascomponente extends Component
                 'nrotelefono' => $resul['nrotelefono'],
                 'whatsapp' => $resul['whatsapp'],
             ]);
-        } 
-        
-
-        
-
+        }  
         $this->modalPersona = false;        
+    }
+
+    //gestion del usuario de persona
+    public function nuevouser($id)
+    {
+        $resul = Persona::find($id);
+        $nombre = strtok($resul->nombres, " ");
+        $apellido = strtok($resul->apellidos, " ");
+
+        $nombreapellido = $nombre.' '.$apellido;
+
+        //dd($nombreapellido);
+        $this->nombres = $nombreapellido;
+        $this->idpersona = $resul->id;
+        $this->reset(['email']);
+        $this->reset(['rol']);
+        $this->modalNuevoUser = true;
+    }
+    public function agregaruser()
+    {
+        $this->validate([
+            'idpersona' => 'required',
+            'nombres' => 'required|string',
+            'email' => 'required|string|email|max:255|unique:users',
+            'rol' => 'required|string'
+        ]);
+        $password = Str::random(10);
+
+        $usuario = User::create([
+            'name' => $this->nombres,
+            'email' => $this->email,
+            'password' => bcrypt($password),
+        ])->assignRole('Administrador');
+        
+        //actualizamos el id de usuario en la tabla de personas
+        $persona = Persona::find($this->idpersona);
+        $persona->user_id = $usuario->id;
+        $persona->save();
+
+        $this->modalNuevoUser = false;
+
+        $mensajeCorreo = 'Por medio de este correo le damos la bienvenid@, puedes ingresar usando las siguientes credenciales: ';
+        $name = $this->nombres;
+        $email = $this->email;
+        $password = $password;
+        
+        try {
+            $confirmacion = Mail::to($email)->send(new RegistroUsuarioMailable($mensajeCorreo, $name, $email, $password));
+                      
+            $this->titulo = 'Notificación.';
+            $this->mensaje = 'Usuario registrado correctamente y correo enviado.';
+            $this->modalMensaje = true;
+        } catch (\Throwable $th) {
+            $confirmacion = false;
+
+            $this->titulo = '¡ Alerta Error !';
+            $this->mensaje = 'Usuario registrado correctamente pero correo no enviado, error en envió de correo. ';
+            $this->modalMensaje = true;
+        }
     }
 
     //componentes para la tabla de personas
@@ -168,9 +233,12 @@ class Personascomponente extends Component
                       ->orWhere('apellidos', 'like', '%'.$this->buscar . '%') //buscar por apellidos
                       ->orderBy('id','desc') //ordenar de forma decendente
                       ->paginate(10); //paginacion
+        
+        $roles = Role::all();
 
         return view('livewire.admin.personascomponente',[
             'personas' => $personas,
+            'roles' => $roles,
         ]);
     }
 

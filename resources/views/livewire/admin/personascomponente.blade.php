@@ -130,13 +130,17 @@
                         </td>
                         <td class="rounded border px-4 py-2">
                             @if (!empty($persona->user))
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                </svg>                                
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded-md text-1xl font-medium hover:bg-blue-700 transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                    </svg>
+                                </button>                                
                             @else
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>                                
+                                <button class="bg-green-600 text-white px-4 py-2 rounded-md text-1xl font-medium hover:bg-green-700 transition duration-300" wire:click="nuevouser({{$persona->id}})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                                    </svg>
+                                </button>                                                            
                             @endif
                         </td>
                         <td class="rounded border px-4 py-2">
@@ -173,45 +177,45 @@
             </x-jet-secondary-button>
         </x-slot>
     </x-jet-dialog-modal>
-<!-- Inicio del Modal para comprobar cedula -->
-<x-jet-dialog-modal wire:model="modalCedula">
-    <x-slot name="title">
-        {{ __('Registro') }}
-    </x-slot>
-    <x-slot name="content">             
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">                
-            <div class="col-span-2 sm:col-span-4">
-                <x-jet-label for="nacionalidad" value="{{ __('Nacionalidad') }}" />
-                <select name="nac" id="nac" wire:model.defer="nac" class="mt-1 block w-full"> 
-                    <option value="" selected>Selecciona la Nacionalidad</option>                                                                         
-                    <option value="V">Venezolano</option>
-                    <option value="E">Extranjero</option>
-                </select> 
-                <x-jet-input-error for="nac" class="mt-2" />                   
+    <!-- Inicio del Modal para comprobar cedula -->
+    <x-jet-dialog-modal wire:model="modalCedula">
+        <x-slot name="title">
+            {{ __('Registro') }}
+        </x-slot>
+        <x-slot name="content">             
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">                
+                <div class="col-span-2 sm:col-span-4">
+                    <x-jet-label for="nacionalidad" value="{{ __('Nacionalidad') }}" />
+                    <select name="nac" id="nac" wire:model.defer="nac" class="mt-1 block w-full"> 
+                        <option value="" selected>Selecciona la Nacionalidad</option>                                                                         
+                        <option value="V">Venezolano</option>
+                        <option value="E">Extranjero</option>
+                    </select> 
+                    <x-jet-input-error for="nac" class="mt-2" />                   
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="ci" value="{{ __('Numero de Cedula') }}" />
+                    <x-jet-input id="ci" type="text" class="mt-1 block w-full" wire:model.defer="ci" />
+                    <x-jet-input-error for="ci" class="mt-2" />
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
+                    <x-jet-input id="fecha_nacimiento" type="date" class="mt-1 block w-full" wire:model.defer="fecha_nacimiento" />
+                    <x-jet-input-error for="fecha_nacimiento" class="mt-2" />
+                </div>                                           
             </div>
-            <div class="col-span-2 sm:col-span-2">
-                <x-jet-label for="ci" value="{{ __('Numero de Cedula') }}" />
-                <x-jet-input id="ci" type="text" class="mt-1 block w-full" wire:model.defer="ci" />
-                <x-jet-input-error for="ci" class="mt-2" />
-            </div>
-            <div class="col-span-2 sm:col-span-2">
-                <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
-                <x-jet-input id="fecha_nacimiento" type="date" class="mt-1 block w-full" wire:model.defer="fecha_nacimiento" />
-                <x-jet-input-error for="fecha_nacimiento" class="mt-2" />
-            </div>                                           
-        </div>
-    </x-slot>            
+        </x-slot>            
 
-    <x-slot name="footer">
-        <x-jet-secondary-button wire:click="$toggle('modalCedula', false)" wire:loading.attr="disabled">
-                {{ __('Cerrar') }}
-        </x-jet-secondary-button>
-        <x-jet-danger-button class="ml-3" wire:click="comprobarCedula()" wire:loading.attr="disabled">
-            {{ __('Guardar') }}
-        </x-jet-danger-button>            
-    </x-slot>
-</x-jet-dialog-modal>
-<!-- Fin del Modal para comprobar cedula -->
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalCedula', false)" wire:loading.attr="disabled">
+                    {{ __('Cerrar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button class="ml-3" wire:click="comprobarCedula()" wire:loading.attr="disabled">
+                {{ __('Guardar') }}
+            </x-jet-danger-button>            
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Fin del Modal para comprobar cedula -->
 <!-- Agregar Persona Confirmation Modal -->
 <x-jet-dialog-modal wire:model="modalPersona">
     <x-slot name="title">
@@ -301,4 +305,44 @@
 </x-jet-dialog-modal>
 
 <!-- Inicio del Modal para mostrar el codigo -->
+    <!-- Inicio del Modal para usuario -->
+    <x-jet-dialog-modal wire:model="modalNuevoUser">
+        <x-slot name="title">
+            {{ __('Registro') }}
+        </x-slot>
+        <x-slot name="content">             
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="name" value="{{ __('Nombre') }}" />
+                    <x-jet-input id="nombres" type="text" class="mt-1 block w-full" wire:model.defer="nombres" disabled/>
+                    <x-jet-input-error for="nombres" class="mt-2" />
+                </div> 
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="rolUsuario" value="{{ __('Rol') }}" />
+                    <select name="rol" id="rol" wire:model.defer="rol" class="mt-1 block w-full">
+                        <option value="" selected>Seleccionar Rol</option>
+                        @foreach ($roles as $role)                            
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>                            
+                        @endforeach                        
+                    </select>                  
+                </div>
+                <div class="col-span-2 sm:col-span-4">
+                    <x-jet-label for="email" value="{{ __('Correo electrónico') }}" />
+                    <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="email" />
+                    <x-jet-input-error for="email" class="mt-2" />
+                </div>
+                <x-jet-input id="idpersona" type="hidden" class="mt-1 block w-full" wire:model.defer="idpersona"/>                
+            </div>
+        </x-slot>            
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalNuevoUser', false)" wire:loading.attr="disabled">
+                    {{ __('Cerrar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button class="ml-3" wire:click="agregaruser()" wire:loading.attr="disabled">
+                {{ __('Guardar') }}
+            </x-jet-danger-button>            
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Fin del Modal para usuario -->
 </div>
