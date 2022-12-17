@@ -18,6 +18,12 @@
                     <x-jet-nav-link href="{{ route('personas') }}" :active="request()->routeIs('personas')">
                         {{ __('Personas') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('familias') }}" :active="request()->routeIs('familias')">
+                        {{ __('Familias') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('habitad') }}" :active="request()->routeIs('habitad')">
+                        {{ __('Habitad') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -145,6 +151,12 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('personas') }}" :active="request()->routeIs('personas')">
                 {{ __('Personas') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('familias') }}" :active="request()->routeIs('familias')">
+                {{ __('Familias') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('habitad') }}" :active="request()->routeIs('habitad')">
+                {{ __('Habitad') }}
             </x-jet-responsive-nav-link>
         </div>
 

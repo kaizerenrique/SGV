@@ -30,3 +30,11 @@ Route::middleware([
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/personas', function () {
     return view('admin/personas');
 })->name('personas');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/familias', function () {
+    return view('admin/familias');
+})->name('familias');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/habitad', function () {
+    return view('admin/habitad');
+})->name('habitad');
