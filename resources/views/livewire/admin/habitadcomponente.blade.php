@@ -12,6 +12,24 @@
         </div>        
     </div>
 
+    <!-- Inicio del Modal para mensajes y alertas  -->
+    <x-jet-dialog-modal wire:model="modalMensaje">
+        <x-slot name="title">
+            {{$titulo}} 
+        </x-slot>
+
+        <x-slot name="content">            
+            {{$mensaje}}            
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalMensaje', false)" wire:loading.attr="disabled">
+                {{ __('Aceptar') }}
+            </x-jet-secondary-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Inicio del Modal para comprobar cedula -->
+
     <!-- Inicio del Modal de registro de habitad -->
     <x-jet-dialog-modal wire:model="modalhabitad">
         <x-slot name="title">

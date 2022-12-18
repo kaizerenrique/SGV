@@ -22,6 +22,8 @@ class Habitadcomponente extends Component
 
     //modals
     public $modalhabitad = false;
+    public $modalMensaje = false;
+    public $titulo , $mensaje;
 
     public function mount()
     {
@@ -51,6 +53,7 @@ class Habitadcomponente extends Component
     public function registrarhabitad()
     {
         $this->validate([
+            'comunal' => 'required',
             'direccion' => 'required',
             'habitad' => 'required|string',
             'literal' => 'nullable',
@@ -63,17 +66,47 @@ class Habitadcomponente extends Component
 
         $codigo = Str::random(10);
 
-        Habitad::create([
-            'codigo' => $codigo,
-            'habitad' => $this->habitad,
-            'literal' => $this->literal,  
-            'tipo' => $this->tipo,  
-            'titularidad' => $this->titularidad,  
-            'observacion' => $this->observacion,  
-            'latitud' => $this->latitud,  
-            'longitud' => $this->longitud,  
-            'direccion_id' => $this->direccion,              
-        ]);     
+        $habitad_count = Habitad::count();
+
+        if ($habitad_count > 0) {
+            $controls = Habitad::where('consejo_comunal_id', $this->comunal)->get();
+
+            foreach ($controls as $control)
+            {
+                if (($control->consejo_comunal_id == $this->comunal) && ($control->direccion_id == $this->direccion) && ($control->habitad == $this->habitad) && ($control->literal == $this->literal)) {
+                    $this->titulo = "¡Alerta!";
+                    $this->mensaje = "La dirección ya se encuentra registrada.";
+                    $this->modalMensaje = true;
+                } else {
+                    Habitad::create([
+                        'codigo' => $codigo,
+                        'habitad' => $this->habitad,
+                        'literal' => $this->literal,  
+                        'tipo' => $this->tipo,  
+                        'titularidad' => $this->titularidad,  
+                        'observacion' => $this->observacion,  
+                        'latitud' => $this->latitud,  
+                        'longitud' => $this->longitud,  
+                        'direccion_id' => $this->direccion,
+                        'consejo_comunal_id' => $this->comunal,                
+                    ]);
+                }
+                
+            }
+        } else {
+            Habitad::create([
+                'codigo' => $codigo,
+                'habitad' => $this->habitad,
+                'literal' => $this->literal,  
+                'tipo' => $this->tipo,  
+                'titularidad' => $this->titularidad,  
+                'observacion' => $this->observacion,  
+                'latitud' => $this->latitud,  
+                'longitud' => $this->longitud,  
+                'direccion_id' => $this->direccion,
+                'consejo_comunal_id' => $this->comunal,                
+            ]); 
+        }
         
         $this->modalhabitad = false;
     }

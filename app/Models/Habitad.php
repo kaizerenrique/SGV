@@ -18,7 +18,8 @@ class Habitad extends Model
         'observacion',
         'latitud',
         'longitud',
-        'direccion_id'
+        'direccion_id',
+        'consejo_comunal_id'
     ];
 
     //Direccion donde se ubica la casa
