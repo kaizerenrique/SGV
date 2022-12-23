@@ -12,6 +12,55 @@
         </div>        
     </div>
 
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">        
+        <div class="flex justify-between">            
+            <div>
+                <input wire:model="buscar" type="search" placeholder="Buscar" class="shadow appearence-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-indigo-500" name="">
+            </div>            
+        </div>
+        <table class="table-auto w-full mt-6">
+            <thead>
+                <tr class="bg-indigo-500 text-white">
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Consejo Comunal</div>
+                    </th>   
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Avenida/Calle/Vereda</div>
+                    </th>                  
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Codito</div>
+                    </th> 
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Descripción</div>
+                    </th>                  
+                    <th class="px-4 py-2">
+                        <div class="flex items-center">Acción</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($habitaciones as $habitacion)
+                    <tr>
+                        <td class="rounded border px-4 py-2">{{$habitacion->consejocomunal->name}}</td> 
+                        <td class="rounded border px-4 py-2">{{$habitacion->direccion->direccion}}</td> 
+                        <td class="rounded border px-4 py-2">{{$habitacion->codigo}}</td>  
+                        <td class="rounded border px-4 py-2">
+                            @if (!empty($habitacion->literal))
+                                {{$habitacion->habitad}} - {{$habitacion->literal}}
+                            @else
+                                {{$habitacion->habitad}}
+                            @endif
+                            
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4">
+        {{$habitaciones->links()}}
+    </div>
+
     <!-- Inicio del Modal para mensajes y alertas  -->
     <x-jet-dialog-modal wire:model="modalMensaje">
         <x-slot name="title">

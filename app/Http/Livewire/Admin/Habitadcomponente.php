@@ -20,6 +20,9 @@ class Habitadcomponente extends Component
     public $codigo , $habitad , $literal , $tipo;
     public $titularidad , $observacion , $latitud , $longitud;
 
+    //barra de busqueda
+    public $buscar;
+
     //modals
     public $modalhabitad = false;
     public $modalMensaje = false;
@@ -111,8 +114,27 @@ class Habitadcomponente extends Component
         $this->modalhabitad = false;
     }
 
+    //componentes para la tabla de personas
+    protected $queryString = [
+        'buscar' => ['except' => '']
+    ];
+
     public function render()
     {
-        return view('livewire.admin.habitadcomponente');
+        $habitaciones = Habitad::where('codigo', 'like', '%'.$this->buscar . '%')  //buscar por cedula 
+                      ->orWhere('habitad', 'like', '%'.$this->buscar . '%') //buscar por nombres
+                      ->orWhere('tipo', 'like', '%'.$this->buscar . '%') //buscar por apellidos
+                      ->orderBy('id','desc') //ordenar de forma decendente
+                      ->paginate(10); //paginacion
+
+        return view('livewire.admin.habitadcomponente',[
+            'habitaciones' => $habitaciones,
+        ]);
+    }
+
+    //Actualizar tabla para corregir falla de busqueda
+    public function updatingBuscar()
+    {
+        $this->resetPage();
     }
 }
