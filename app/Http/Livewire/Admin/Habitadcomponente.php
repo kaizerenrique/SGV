@@ -72,7 +72,7 @@ class Habitadcomponente extends Component
         $habitad_count = Habitad::count();
 
         if ($habitad_count > 0) {
-            $controls = Habitad::where('consejo_comunal_id', $this->comunal)->get();
+            $controls = Habitad::where('consejo_comunal_id', $this->comunal)->get();            
 
             foreach ($controls as $control)
             {
@@ -80,21 +80,30 @@ class Habitadcomponente extends Component
                     $this->titulo = "¡Alerta!";
                     $this->mensaje = "La dirección ya se encuentra registrada.";
                     $this->modalMensaje = true;
+                    $resul = false;
+                } elseif (($control->consejo_comunal_id == $this->comunal) && ($control->direccion_id == $this->direccion) && ($control->habitad == $this->habitad)){
+                    $this->titulo = "¡Alerta!";
+                    $this->mensaje = "La dirección ya se encuentra registrada.";
+                    $this->modalMensaje = true;
+                    $resul = false;
                 } else {
-                    Habitad::create([
-                        'codigo' => $codigo,
-                        'habitad' => $this->habitad,
-                        'literal' => $this->literal,  
-                        'tipo' => $this->tipo,  
-                        'titularidad' => $this->titularidad,  
-                        'observacion' => $this->observacion,  
-                        'latitud' => $this->latitud,  
-                        'longitud' => $this->longitud,  
-                        'direccion_id' => $this->direccion,
-                        'consejo_comunal_id' => $this->comunal,                
-                    ]);
-                }
-                
+                    $resul = true;
+                }                
+            }
+
+            if ($resul == true) {
+                Habitad::create([
+                    'codigo' => $codigo,
+                    'habitad' => $this->habitad,
+                    'literal' => $this->literal,  
+                    'tipo' => $this->tipo,  
+                    'titularidad' => $this->titularidad,  
+                    'observacion' => $this->observacion,  
+                    'latitud' => $this->latitud,  
+                    'longitud' => $this->longitud,  
+                    'direccion_id' => $this->direccion,
+                    'consejo_comunal_id' => $this->comunal,                
+                ]);
             }
         } else {
             Habitad::create([
