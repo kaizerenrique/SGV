@@ -236,9 +236,13 @@ class Personascomponente extends Component
         
         $roles = Role::all();
 
+        //Numero de personas registradas
+        $personasnumero = Persona::count();
+
         return view('livewire.admin.personascomponente',[
             'personas' => $personas,
             'roles' => $roles,
+            'personasnumero' => $personasnumero,
         ]);
     }
 
