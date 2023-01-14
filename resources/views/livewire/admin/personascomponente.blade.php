@@ -1,5 +1,5 @@
 <div class="p-2">
-    <div class="mt-4 text-2xl">
+    <div class="mt-4">
         <div class="mt-4 text-2xl flex justify-between">
             <div class="mt-4 mb-4 text-2xl flex justify-between leading-normal">
                 <span>Personas Registradas</span> 
@@ -27,7 +27,7 @@
         <div class="flex justify-between">
             <div>
                 <input wire:model="buscar" type="search" placeholder="Buscar"
-                    class="shadow appearence-none border border-solid border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-indigo-500"
+                    class="shadow appearence-none border border-solid border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-indigo-500"
                     name="">
             </div>
         </div>
