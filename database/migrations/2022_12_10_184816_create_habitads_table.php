@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('habitad');
             $table->string('literal')->nullable();             
             $table->string('tipo');
-            $table->string('titularidad')->nullable();
             $table->string('observacion')->nullable();
             $table->string('latitud')->nullable();
             $table->string('longitud')->nullable();

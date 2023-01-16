@@ -14,7 +14,6 @@ class Habitad extends Model
         'habitad',
         'literal',
         'tipo',
-        'titularidad',
         'observacion',
         'latitud',
         'longitud',
