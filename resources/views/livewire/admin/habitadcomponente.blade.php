@@ -45,6 +45,9 @@
                         <div class="flex items-center">Descripción</div>
                     </th>
                     <th class="px-4 py-2">
+                        <div class="flex items-center">Coordenadas</div>
+                    </th>
+                    <th class="px-4 py-2">
                         <div class="flex items-center">Acción</div>
                     </th>
                 </tr>
@@ -67,7 +70,20 @@
                             @else
                                 {{$habitacion->habitad}}
                             @endif                           
-                        </td>                                             
+                        </td> 
+                        <td class="px-4 py-2">
+                            <a href="#" class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor"
+                                    class="w-6 h-6 text-gray-600 transition duration-75 dark:text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                </svg>
+                                <span>{{ $habitacion->latitud }} {{ $habitacion->longitud }}</span>
+                            </a>
+                        </td>                                            
                         <td class="px-4 py-2 text-center">
                             <div class="flex item-center">
                                 <div class="w-4 mr-6 transform hover:text-purple-500 hover:scale-110">
