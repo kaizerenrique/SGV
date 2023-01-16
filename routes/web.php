@@ -35,6 +35,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('admin/familias', function 
     return view('admin/familias');
 })->name('familias');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/nuevafamilia', function () {
+    return view('admin/nuevafamilia');
+})->name('nuevafamilia');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/direcciones', function () {
     return view('admin/direcciones');
 })->name('direcciones');
