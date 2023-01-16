@@ -61,7 +61,7 @@
             </li> 
 
             <li>
-                <a href="#"
+                <a href="{{ route('direcciones') }}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">                    
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600 transition duration-75 dark:text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
