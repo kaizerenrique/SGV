@@ -57,7 +57,7 @@
                         </td>
                         <td class="px-4 py-2">                        
                             <span>{{$habitacion->direccion->direccion}}</span>                               
-                        </td>
+                        </td>                        
                         <td class="px-4 py-2">                            
                             <span>{{$habitacion->codigo}}</span>                            
                         </td>
@@ -67,7 +67,7 @@
                             @else
                                 {{$habitacion->habitad}}
                             @endif                           
-                        </td>                                               
+                        </td>                                             
                         <td class="px-4 py-2 text-center">
                             <div class="flex item-center">
                                 <div class="w-4 mr-6 transform hover:text-purple-500 hover:scale-110">

@@ -10,7 +10,6 @@ class Direccioncomponente extends Component
 {
     use WithPagination;
 
-    public $latitud , $longitud;
     //barra de busqueda
     public $buscar;
 
@@ -37,10 +36,5 @@ class Direccioncomponente extends Component
     {
         $this->resetPage();
     }
-
-    public function geolocalizacion($id)
-    {      
-        $resul = Direccion::find($id);
-        dd($resul->latitud);
-    }
+    
 }

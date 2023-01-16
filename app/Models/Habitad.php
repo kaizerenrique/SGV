@@ -32,4 +32,5 @@ class Habitad extends Model
     {
         return $this->belongsTo(ConsejoComunal::class, 'consejo_comunal_id');
     }
+    
 }
