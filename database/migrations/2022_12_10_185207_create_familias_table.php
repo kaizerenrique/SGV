@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('familias', function (Blueprint $table) {
             $table->id();
             $table->string('codigo');
-            $table->enum('status',['Pendiente' , 'Procesando' , 'Completado' , 'Cancelado'])->default('Pendiente');
+            $table->enum('status',['Pendiente' , 'Procesando' , 'Completado' , 'Desincorporado'])->default('Pendiente');
             $table->foreignId('consejo_comunal_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
                     ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
