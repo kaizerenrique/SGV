@@ -115,7 +115,7 @@
                                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                     </svg>
                                 </div>
-                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110" wire:click="eliminarfamiliaconsulta({{ $familia->id }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -132,4 +132,39 @@
     <div class="mt-4">
         {{ $familias->links() }}
     </div>
+    <!-- Inicio del Modal para Eliminar familia -->
+    <x-jet-dialog-modal wire:model="modalBorrarFamilia">
+        <x-slot name="title">
+            {{ __('Borrar Familia') }}
+        </x-slot>
+        <x-slot name="content">             
+            {{$mensaje}}
+        </x-slot>
+
+        <x-slot name="footer">            
+            <x-jet-secondary-button wire:click="$toggle('modalBorrarFamilia', false)" wire:loading.attr="disabled">
+                {{ __('Cerrar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button class="ml-3" wire:click="eliminarfamilia({{$identificador}})" wire:loading.attr="disabled">
+                {{ __('Eliminar') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+<!-- Fin del Modal para Eliminar Usuario -->
+<!-- Inicio del Modal para mensajes alertas-->
+<x-jet-dialog-modal wire:model="modalMensaje">
+    <x-slot name="title">
+        {{ $titulo }}
+    </x-slot>
+    <x-slot name="content">             
+        {{$mensaje}}
+    </x-slot>
+
+    <x-slot name="footer">            
+        <x-jet-secondary-button wire:click="$toggle('modalMensaje', false)" wire:loading.attr="disabled">
+            {{ __('Cerrar') }}
+        </x-jet-secondary-button>
+    </x-slot>
+</x-jet-dialog-modal>
+<!-- Fin del Modal para mensajes alertas -->
 </div>
