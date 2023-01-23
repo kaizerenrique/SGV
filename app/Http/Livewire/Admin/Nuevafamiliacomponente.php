@@ -73,6 +73,7 @@ class Nuevafamiliacomponente extends Component
         $familia->consejo_comunal_id = $this->consejocomunal;
         $familia->clap_id = $this->clap;
         $familia->habitad_id = $this->habitad;
+        $familia->user_id = auth()->user()->id;
         $familia->save();
 
     }

@@ -49,6 +49,9 @@
                         <div class="flex items-center">Clap</div>
                     </th>
                     <th class="px-4 py-2">
+                        <div class="flex items-center">Registro</div>
+                    </th>
+                    <th class="px-4 py-2">
                         <div class="flex items-center">Acción</div>
                     </th>
                 </tr>
@@ -90,7 +93,10 @@
                         </td>
                         <td class="px-4 py-2">                            
                             {{ $familia->clap->name }}                            
-                        </td>                                               
+                        </td>  
+                        <td class="px-4 py-2">
+                            {{ $familia->user->name }}
+                        </td>                                              
                         <td class="px-4 py-2 text-center">
                             <div class="flex item-center">
                                 <div class="w-4 mr-6 transform hover:text-purple-500 hover:scale-110">

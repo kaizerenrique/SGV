@@ -36,4 +36,10 @@ class Familia extends Model
     {
         return $this->hasMany(Persona::class);
     }
+
+    //usuario que registra
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
