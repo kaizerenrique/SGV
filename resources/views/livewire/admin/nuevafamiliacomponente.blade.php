@@ -23,6 +23,7 @@
                         <option value="{{ $consejocomunal->id }}">{{ $consejocomunal->name }}</option>                            
                     @endforeach                        
                 </select>
+                <x-jet-input-error for="consejocomunal" class="mt-2" />
             </div>
         
             <div class="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-6 xl:col-span-4">
@@ -35,6 +36,7 @@
                         <option value="{{ $clap->id }}">{{ $clap->name }}</option>                            
                     @endforeach                        
                 </select>
+                <x-jet-input-error for="clap" class="mt-2" />
             </div>
         
             <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-4">
@@ -47,6 +49,7 @@
                         <option value="{{ $direccion->id }}">{{ $direccion->direccion }}</option>                            
                     @endforeach                        
                 </select>
+                <x-jet-input-error for="direccion" class="mt-2" />
             </div>
         
             <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-4">
@@ -59,6 +62,22 @@
                         <option value="{{ $habitad->id }}">{{ $habitad->habitad}} -{{ $habitad->literal}}</option>                            
                     @endforeach                        
                 </select>
+                <x-jet-input-error for="habitad" class="mt-2" />
+            </div>
+
+            <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-4"">
+                <x-jet-label for="tenencia" value="{{ __('Forma de Tenencia') }}" />
+                <select name="tipodetenencia" id="tipodetenencia" wire:model.defer="tipodetenencia" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light"> 
+                    <option value="" selected>Forma de Tenencia</option>                                                                         
+                    <option value="Propia">Propia</option>
+                    <option value="Alquilada">Alquilada</option>
+                    <option value="Compartida">Compartida</option>
+                    <option value="Invadida">Invadida</option>
+                    <option value="Traspasada">Traspasada</option>
+                    <option value="Prestada">Prestada</option>
+                    <option value="Otro">Otro</option>
+                </select> 
+                <x-jet-input-error for="tipodetenencia" class="mt-2" />                   
             </div>
 
             <div class="col-span-2 sm:col-span-2">

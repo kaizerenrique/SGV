@@ -10,13 +10,14 @@ use App\Models\Direccion;
 use App\Models\Habitad;
 use App\Models\Familia;
 use App\Models\Persona;
+use App\Models\Tenencia;
 
 class Nuevafamiliacomponente extends Component
 {
     use WithPagination;
     
     //variables
-    public $consejocomunal , $clap , $direccion , $habitad, $codigo, $idfamilia;
+    public $consejocomunal , $clap , $direccion , $habitad, $codigo, $idfamilia, $tipodetenencia;
     public $consejocomunales = [] , $claps = [] , $direcciones = [] , $habitads = [];
 
     public $modalPersona = false;
@@ -62,7 +63,8 @@ class Nuevafamiliacomponente extends Component
             'consejocomunal' => 'required', 
             'clap' => 'required', 
             'direccion' => 'required', 
-            'habitad' => 'required'
+            'habitad' => 'required',
+            'tipodetenencia' => 'required'
         ]);
 
         $this->codigo = uniqid('Familia-');
@@ -75,6 +77,12 @@ class Nuevafamiliacomponente extends Component
         $familia->habitad_id = $this->habitad;
         $familia->user_id = auth()->user()->id;
         $familia->save();
+
+        $tenencia = new Tenencia();
+        $tenencia->tipodetenencia = $this->tipodetenencia;
+        $tenencia->familia_id = $familia->id;
+        $tenencia->habitad_id = $this->habitad;
+        $tenencia->save();
 
     }
 

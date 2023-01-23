@@ -42,4 +42,9 @@ class Familia extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function formadetenencia()
+    {
+        return $this->hasOne(Tenencia::class);
+    }
 }
