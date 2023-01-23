@@ -65,7 +65,7 @@
                 <x-jet-input-error for="habitad" class="mt-2" />
             </div>
 
-            <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-4"">
+            <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-4">
                 <x-jet-label for="tenencia" value="{{ __('Forma de Tenencia') }}" />
                 <select name="tipodetenencia" id="tipodetenencia" wire:model.defer="tipodetenencia" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light"> 
                     <option value="" selected>Forma de Tenencia</option>                                                                         

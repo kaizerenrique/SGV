@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Personasdatoscomponente;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware([
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/personas', function () {
     return view('admin/personas');
 })->name('personas');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/persona_datos/{persona_id}', Personasdatoscomponente::class)->name('persona_datos');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/familias', function () {
     return view('admin/familias');

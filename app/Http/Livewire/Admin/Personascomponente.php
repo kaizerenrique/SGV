@@ -35,6 +35,8 @@ class Personascomponente extends Component
 
     //usuario para persona
     public $email , $rol, $idpersona;
+
+    public $persona_id;
     
     //modals
     public $modalCedula = false;
@@ -158,7 +160,10 @@ class Personascomponente extends Component
                 'whatsapp' => $resul['whatsapp'],
             ]);
         }  
-        $this->modalPersona = false;        
+        $this->modalPersona = false; 
+        
+        $persona_id = $persona->id;
+        return redirect()->route('persona_datos',$persona_id);
     }
 
     //gestion del usuario de persona
