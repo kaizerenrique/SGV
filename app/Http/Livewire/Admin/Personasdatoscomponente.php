@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Persona;
+use App\Models\Carnetdelapatria;
 
 class Personasdatoscomponente extends Component
 {
@@ -74,8 +75,8 @@ class Personasdatoscomponente extends Component
     }
 
     protected $rules = [
-        'codigo' => 'nullable|string|digits_between:6,8',
-        'serial' => 'nullable|string|digits_between:6,8',
+        'codigo' => 'nullable|string|min:8|max:12|unique:carnetdelapatrias',
+        'serial' => 'nullable|string|min:8|max:12|unique:carnetdelapatrias',
         'hogarespatria' => 'required',
         'integrantes' => 'nullable|string|digits_between:1,2',
         'partohumanizado' => 'nullable',
@@ -90,7 +91,7 @@ class Personasdatoscomponente extends Component
         'esterilizacion' => 'nullable',
         'discapacidad' => 'nullable',
         'carnetdiscapacidad' => 'nullable',
-        'codigocarnetdiscapacidad' => 'nullable|string',
+        'codigocarnetdiscapacidad' => 'nullable|string|min:8|max:12',
         'enfermedadcronica' => 'nullable',
         'atencionmedica' => 'nullable',
         'quirurgica' => 'nullable',
@@ -100,6 +101,21 @@ class Personasdatoscomponente extends Component
     public function guardardatos()
     {
         $info = $this->validate();
-        dd($info);
+        //dd($this->persona_id);
+
+        $persona = Persona::find($this->persona_id);
+
+        $carnetdelapatria = $persona->datospatria()->create([
+            'codigo' => $info['codigo'],
+            'serial' => $info['serial'],
+            'hogarespatria' => $info['hogarespatria'],
+            'integrantes' => $info['integrantes'],
+            'partohumanizado' => $info['partohumanizado'],
+            'lactanciamaterna' => $info['lactanciamaterna'],
+            'mjgh' => $info['mjgh'],
+            'amormayor' => $info['amormayor'],
+        ]);
+
+        dd($carnetdelapatria);
     }
 }

@@ -13,17 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('phones', function (Blueprint $table) {
+        Schema::create('carnetdelapatrias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('persona_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
                     ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->string('codigo_internacional');
-            $table->string('codigo_operador');
-            $table->string('nrotelefono');
-            $table->boolean('whatsapp')->default(false)->nullable(); //si tiene o no whatsapp
+
+            $table->string('codigo')->unique()->nullable();
+            $table->string('serial')->unique()->nullable();
+            $table->string('hogarespatria');
+            $table->string('integrantes');
+            $table->boolean('partohumanizado')->nullable();
+            $table->boolean('lactanciamaterna')->nullable();
+            $table->boolean('mjgh')->nullable();
+            $table->boolean('amormayor')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phones');
+        Schema::dropIfExists('carnetdelapatrias');
     }
 };

@@ -49,4 +49,9 @@ class Persona extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function datospatria()
+    {
+        return $this->hasOne(Carnetdelapatria::class);
+    }
+
 }
