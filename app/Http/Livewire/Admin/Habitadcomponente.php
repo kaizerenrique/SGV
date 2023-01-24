@@ -20,6 +20,8 @@ class Habitadcomponente extends Component
     public $codigo , $habitad , $literal , $tipo;
     public $observacion , $latitud , $longitud;
 
+    public $tanquedeagua, $capacidad;
+
     //barra de busqueda
     public $buscar;
 
@@ -49,6 +51,8 @@ class Habitadcomponente extends Component
         $this->reset(['observacion']);
         $this->reset(['latitud']);
         $this->reset(['longitud']);
+        $this->reset(['tanquedeagua']);
+        $this->reset(['capacidad']);
         $this->modalhabitad = true;
     }
 
@@ -62,12 +66,13 @@ class Habitadcomponente extends Component
             'tipo' => 'required',
             'observacion' => 'nullable',
             'latitud' => 'nullable',
-            'longitud' => 'nullable',                    
+            'longitud' => 'nullable',
+            'tanquedeagua' => 'nullable',  
+            'capacidad' => 'nullable',                  
         ]);
-
         $codigo = Str::random(10);
 
-        Habitad::create([
+        $indice = Habitad::create([
             'codigo' => $codigo,
             'habitad' => $this->habitad,
             'literal' => $this->literal,  
@@ -77,6 +82,11 @@ class Habitadcomponente extends Component
             'longitud' => $this->longitud,  
             'direccion_id' => $this->direccion,
             'consejo_comunal_id' => $this->comunal,                
+        ]);
+
+        $agua = $indice->serviciodeagua()->create([
+            'tanquedeagua' => $this->tanquedeagua,
+            'capacidad' => $this->capacidad,
         ]);
         
         $this->modalhabitad = false;
@@ -94,9 +104,16 @@ class Habitadcomponente extends Component
                       ->orWhere('tipo', 'like', '%'.$this->buscar . '%') //buscar por apellidos
                       ->orderBy('id','desc') //ordenar de forma decendente
                       ->paginate(10); //paginacion
+        
+        if ($this->tanquedeagua == true) {
+            $estado_tanquedeagua = true;
+        } else {
+            $estado_tanquedeagua = false;
+        }
 
         return view('livewire.admin.habitadcomponente',[
             'habitaciones' => $habitaciones,
+            'estado_tanquedeagua' => $estado_tanquedeagua
         ]);
     }
 

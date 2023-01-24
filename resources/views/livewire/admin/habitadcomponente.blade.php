@@ -182,11 +182,22 @@
                     <x-jet-input id="habitad" type="text" class="mt-1 block w-full" wire:model.defer="habitad" />
                     <x-jet-input-error for="habitad" class="mt-2" />
                 </div>
-                <div class="col-span-2 sm:col-span-2">
+                <div class="col-span-1 sm:col-span-1">
                     <x-jet-label for="literal" value="{{ __('Literal') }}" />
                     <x-jet-input id="literal" type="text" class="mt-1 block w-full" wire:model.defer="literal" />
                     <x-jet-input-error for="literal" class="mt-2" />
                 </div>
+                <div class="col-span-1 sm:col-span-1">
+                    <x-jet-label for="tanquedeagua" value="{{ __('¿Tiene Tanque de Agua?') }}" />
+                    <x-jet-input id="tanquedeagua" type="checkbox" class="mt-1 mr-2" wire:model="tanquedeagua" />                                    
+                </div>
+                @if ($estado_tanquedeagua == true)
+                    <div class="col-span-2 sm:col-span-2">
+                        <x-jet-label for="capacidad" value="{{ __('Capacidad en LTS') }}" />
+                        <x-jet-input id="capacidad" type="text" class="mt-1 block w-full" wire:model.defer="capacidad" />
+                        <x-jet-input-error for="capacidad" class="mt-2" />
+                    </div>
+                @endif 
                 <div class="col-span-2 sm:col-span-4">
                     <x-jet-label for="observacion" value="{{ __('Observación') }}" />
                     <x-jet-input id="observacion" type="text" class="mt-1 block w-full" wire:model.defer="observacion" />
