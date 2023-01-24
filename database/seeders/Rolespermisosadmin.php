@@ -20,6 +20,10 @@ class Rolespermisosadmin extends Seeder
         //configuracion de roles y permisos
         //Roles del Sistema
         $admin = Role::create(['name' => 'Administrador']); //Administrador del Sistema 
+        $somos = Role::create(['name' => 'Somos Venezuela']);
+        $vcomunal = Role::create(['name' => 'Vocero Consejo Comunal']);
+        $lcomunidad = Role::create(['name' => 'Lider de Comunidad']);
+        $lcalle = Role::create(['name' => 'Lider de Calle']);
         $user = Role::create(['name' => 'Usuario']); //Usuario Final
 
         //permisos
@@ -32,5 +36,6 @@ class Rolespermisosadmin extends Seeder
             'password' => bcrypt('123456789'),
             'email_verified_at' => '2022-02-26 20:48:29'
         ])->assignRole('Administrador');
+
     }
 }
