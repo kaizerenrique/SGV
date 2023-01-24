@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Personasdatoscomponente;
+use App\Http\Livewire\Admin\Serviciogascomponente;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('admin/familias', function 
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/nuevafamilia', function () {
     return view('admin/nuevafamilia');
 })->name('nuevafamilia');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/familiaserviciogas/{familia_id}', Serviciogascomponente::class)->name('familiaserviciogas');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/direcciones', function () {
     return view('admin/direcciones');

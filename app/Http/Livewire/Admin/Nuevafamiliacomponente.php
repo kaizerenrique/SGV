@@ -131,10 +131,10 @@ class Nuevafamiliacomponente extends Component
             $famil->status = 'Completado';            
             $famil->save();
         }
-
         
+        return redirect()->route('familiaserviciogas', $idfamilia);        
 
-        return redirect()->route('familias');
+        //return redirect()->route('familias');
     }
     
 

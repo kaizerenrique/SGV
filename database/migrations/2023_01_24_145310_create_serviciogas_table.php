@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('laborals', function (Blueprint $table) {
+        Schema::create('serviciogas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id') // UNSIGNED BIG INT
+            $table->foreignId('familia_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
                     ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
                     ->onDelete('cascade')
-                    ->onUpdate('cascade');            
-            
-            $table->boolean('trabaja')->nullable();
-            $table->string('condicionlaboral')->nullable();
+                    ->onUpdate('cascade');
+
+            $table->boolean('gas_directo')->nullable();
+            $table->boolean('bombonas_gas')->nullable();
+
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laborals');
+        Schema::dropIfExists('serviciogas');
     }
 };

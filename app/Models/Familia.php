@@ -47,4 +47,9 @@ class Familia extends Model
     {
         return $this->hasOne(Tenencia::class);
     }
+
+    public function serviciogas()
+    {
+        return $this->hasOne(Serviciogas::class);
+    }
 }
