@@ -58,8 +58,40 @@
                                             <x-jet-input id="integrantes" type="text" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light" wire:model.defer="integrantes" />
                                             <x-jet-input-error for="integrantes" class="mt-2" />
                                         </div>
-                                    @endif                                     
+                                    @endif                            
                                 </div>                                 
+                            </div>
+                            <div class="mt-2 px-4">
+                                <div class="text-2xl flex justify-between">
+                                    <div class="mb-4 text-lg text-gray-600 flex justify-between leading-normal">
+                                        <span>Posee alguno de estos beneficios:</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+                                    @if ($persona->sexo == 'Femenino')
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="partohumanizado" value="{{ __('Parto Humanizado') }}" />
+                                            <x-jet-input id="partohumanizado" type="checkbox" class="mt-1 mr-2 border border-solid border-gray-300" wire:model.defer="partohumanizado" />                                    
+                                        </div> 
+        
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="lactanciamaterna" value="{{ __('Lactancia Materna') }}" />
+                                            <x-jet-input id="lactanciamaterna" type="checkbox" class="mt-1 mr-2" wire:model.defer="lactanciamaterna" />                                    
+                                        </div>                                     
+                                    @endif                                    
+
+                                    <div class="col-span-2 sm:col-span-2">
+                                        <x-jet-label for="mjgh" value="{{ __('Mision Jose Gregorio Hernandez:') }}" />
+                                        <x-jet-input id="mjgh" type="checkbox" class="mt-1 mr-2" wire:model.defer="mjgh" />                                    
+                                    </div> 
+    
+                                    <div class="col-span-2 sm:col-span-2">
+                                        <x-jet-label for="amormayor" value="{{ __('Amor Mayor') }}" />
+                                        <x-jet-input id="amormayor" type="checkbox" class="mt-1 mr-2" wire:model.defer="amormayor" />                                    
+                                    </div> 
+                                </div>
+
                             </div>
                             <div class="mt-4 px-4">
                                 <div class="text-2xl flex justify-between">
@@ -119,6 +151,73 @@
                                             <x-jet-input-error for="condicionlaboral" class="mt-2" />                   
                                         </div> 
                                     @endif
+                                </div>                                
+                            </div>
+
+                            <div class="mt-4 px-4">
+                                <div class="text-2xl flex justify-between">
+                                    <div class="mb-4 text-xl text-gray-600 flex justify-between leading-normal">
+                                        <span>Información de Salud</span>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+                                    @if ($persona->sexo == 'Femenino')
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="gestacion" value="{{ __('Estado de Gestación') }}" />
+                                            <x-jet-input id="gestacion" type="checkbox" class="mt-1 mr-2" wire:model.defer="gestacion" />                                    
+                                        </div> 
+        
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="esterilizacion" value="{{ __('Requieren de Esterilización') }}" />
+                                            <x-jet-input id="esterilizacion" type="checkbox" class="mt-1 mr-2" wire:model.defer="esterilizacion" />                                    
+                                        </div>                                     
+                                    @endif  
+                                    <div class="col-span-2 sm:col-span-2">
+                                        <x-jet-label for="discapacidad" value="{{ __('Presenta alguna discapacidad') }}" />
+                                        <x-jet-input id="discapacidad" type="checkbox" class="mt-1 mr-2" wire:model="discapacidad" />                                    
+                                    </div>  
+                                    @if ($estado_discapacidad == true)
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="carnetdiscapacidad" value="{{ __('Posee el carnet de discapacidad') }}" />
+                                            <x-jet-input id="carnetdiscapacidad" type="checkbox" class="mt-1 mr-2" wire:model="carnetdiscapacidad" />                                    
+                                        </div>
+
+                                        @if ($estado_carnetdiscapacidad == true)
+                                            <div class="col-span-2 sm:col-span-2">
+                                                <x-jet-label for="codigocarnetdiscapacidad" value="{{ __('Código del Carnet de discapacidad') }}" />
+                                                <x-jet-input id="codigocarnetdiscapacidad" type="text" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light" wire:model.defer="codigocarnetdiscapacidad" />
+                                                <x-jet-input-error for="codigocarnetdiscapacidad" class="mt-2" />
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                    <div class="col-span-2 sm:col-span-2">
+                                        <x-jet-label for="enfermedadcronica" value="{{ __('Presenta alguna enfermedad crónica') }}" />
+                                        <x-jet-input id="enfermedadcronica" type="checkbox" class="mt-1 mr-2" wire:model="enfermedadcronica" />                                    
+                                    </div>  
+
+                                    @if ($estado_enfermedadcronica == true)
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="atencionmedica" value="{{ __('Está reciben atención médica ') }}" />
+                                            <x-jet-input id="atencionmedica" type="checkbox" class="mt-1 mr-2" wire:model.defer="atencionmedica" />                                    
+                                        </div>                                        
+                                    @endif
+
+                                    <div class="col-span-2 sm:col-span-2">
+                                        <x-jet-label for="quirurgica" value="{{ __('Requieren Intervención Quirúrgica') }}" />
+                                        <x-jet-input id="quirurgica" type="checkbox" class="mt-1 mr-2" wire:model="quirurgica" />                                    
+                                    </div> 
+
+                                    @if ($estado_quirurgica == true)
+                                        <div class="col-span-2 sm:col-span-2">
+                                            <x-jet-label for="tipoquirurgica" value="{{ __('De que tipo') }}" />
+                                            <x-jet-input id="tipoquirurgica" type="text" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light" wire:model.defer="tipoquirurgica" />
+                                            <x-jet-input-error for="tipoquirurgica" class="mt-2" />
+                                        </div>
+                                    @endif
+
+
                                 </div>                                
                             </div>
                             <div class="px-4 col-span-2 sm:col-span-2 pt-4">
