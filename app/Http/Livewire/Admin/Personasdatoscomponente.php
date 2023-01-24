@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Models\Persona;
 use App\Models\Carnetdelapatria;
+use App\Models\Educacion;
+use App\Models\Laboral;
 
 class Personasdatoscomponente extends Component
 {
@@ -15,6 +17,9 @@ class Personasdatoscomponente extends Component
     public $partohumanizado, $lactanciamaterna, $mjgh, $amormayor;
     public $gestacion, $esterilizacion, $discapacidad, $carnetdiscapacidad, $codigocarnetdiscapacidad, $enfermedadcronica;
     public $atencionmedica, $quirurgica, $tipoquirurgica;
+
+    public $modalMensaje = false;
+    public $titulo , $mensaje;
 
     public function mount($persona_id )
     {
@@ -91,7 +96,7 @@ class Personasdatoscomponente extends Component
         'esterilizacion' => 'nullable',
         'discapacidad' => 'nullable',
         'carnetdiscapacidad' => 'nullable',
-        'codigocarnetdiscapacidad' => 'nullable|string|min:8|max:12',
+        'codigocarnetdiscapacidad' => 'nullable|string|min:8|max:12|unique:discapacidads',
         'enfermedadcronica' => 'nullable',
         'atencionmedica' => 'nullable',
         'quirurgica' => 'nullable',
@@ -101,7 +106,7 @@ class Personasdatoscomponente extends Component
     public function guardardatos()
     {
         $info = $this->validate();
-        //dd($this->persona_id);
+        //dd($info);
 
         $persona = Persona::find($this->persona_id);
 
@@ -116,6 +121,39 @@ class Personasdatoscomponente extends Component
             'amormayor' => $info['amormayor'],
         ]);
 
-        dd($carnetdelapatria);
+        $educacion = $persona->educacion()->create([
+            'gradodeintruccion' => $info['gradodeintruccion'],
+            'estudia' => $info['estudia'],
+        ]);
+
+        $laboral = $persona->laboral()->create([
+            'trabaja' => $info['trabaja'],
+            'condicionlaboral' => $info['condicionlaboral'],
+        ]);
+
+        $discapacidad = $persona->discapacidad()->create([
+            'discapacidad' => $info['discapacidad'],
+            'carnetdiscapacidad' => $info['carnetdiscapacidad'],
+            'codigocarnetdiscapacidad' => $info['codigocarnetdiscapacidad'],
+        ]);
+
+        $salud = $persona->salud()->create([
+            'gestacion' => $info['gestacion'],
+            'esterilizacion' => $info['esterilizacion'],
+            'enfermedadcronica' => $info['enfermedadcronica'],
+            'atencionmedica' => $info['atencionmedica'],
+            'quirurgica' => $info['quirurgica'],
+            'tipoquirurgica' => $info['tipoquirurgica'],
+        ]);
+
+        
+        $this->titulo = '¡Alerta!';
+        $this->mensaje = 'Registro Exitoso';
+        $this->modalMensaje = true;
+    }
+
+    public function retornar()
+    {
+        return redirect()->route('personas');
     }
 }

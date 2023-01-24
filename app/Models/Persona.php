@@ -54,4 +54,26 @@ class Persona extends Model
         return $this->hasOne(Carnetdelapatria::class);
     }
 
+    public function educacion()
+    {
+        return $this->hasOne(Educacion::class);
+    }
+
+    public function laboral()
+    {
+        return $this->hasOne(Laboral::class);
+    }
+
+    public function discapacidad()
+    {
+        return $this->hasOne(Discapacidad::class);
+    }
+
+    public function salud()
+    {
+        return $this->hasOne(Salud::class);
+    }
+
+
+
 }

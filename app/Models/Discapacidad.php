@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Phone extends Model
+class Discapacidad extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'codigo_internacional',
-        'codigo_operador',
-        'nrotelefono',
-        'whatsapp'
+        'discapacidad',
+        'carnetdiscapacidad',
+        'codigocarnetdiscapacidad'
     ];
 
     public function persona()

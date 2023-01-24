@@ -237,4 +237,23 @@
             </div>
         </div>
     </div>
+    
+    <!-- Inicio del Modal para mensajes y alertas  -->
+    <x-jet-dialog-modal wire:model="modalMensaje">
+        <x-slot name="title">
+            {{$titulo}} 
+        </x-slot>
+
+        <x-slot name="content">            
+            {{$mensaje}}            
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="retornar()" wire:loading.attr="disabled">
+                {{ __('Aceptar') }}
+            </x-jet-secondary-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Inicio del Modal para comprobar cedula -->
+
 </div>
