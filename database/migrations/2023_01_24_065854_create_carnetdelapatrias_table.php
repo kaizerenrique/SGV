@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('codigo')->unique()->nullable();
             $table->string('serial')->unique()->nullable();
             $table->string('hogarespatria');
-            $table->string('integrantes');
+            $table->string('integrantes')->nullable();
             $table->boolean('partohumanizado')->nullable();
             $table->boolean('lactanciamaterna')->nullable();
             $table->boolean('mjgh')->nullable();
