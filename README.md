@@ -3,7 +3,7 @@
 # SISCAMVE
 
 ## Sistema de Control Atención y Movilización Vecinal
-_La siguiente aplicación ha sido desarrollada a solicitud de un grupo de organizaciones sociales, integrando en él sus requerimientos.  _
+La siguiente aplicación ha sido desarrollada a solicitud de un grupo de organizaciones sociales, integrando en él sus requerimientos.
 
 ## Construido con 🛠️
 * [laravel](https://laravel.com/) - El framework web usado
