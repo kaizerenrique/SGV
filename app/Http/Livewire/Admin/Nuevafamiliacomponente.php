@@ -12,6 +12,7 @@ use App\Models\Familia;
 use App\Models\Persona;
 use App\Models\Tenencia;
 use App\Models\Serviciogas;
+use PhpParser\Node\Expr\FuncCall;
 
 class Nuevafamiliacomponente extends Component
 {
@@ -157,6 +158,13 @@ class Nuevafamiliacomponente extends Component
                 return redirect()->route('familias');
             }            
         }
+    }
+
+    public function eliminarintegrante($id)
+    {
+        $integrante = Persona::find($id);
+        $integrante->familia_id = null;
+         $integrante->save(); 
     }
     
 
