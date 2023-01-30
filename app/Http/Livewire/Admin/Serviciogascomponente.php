@@ -77,5 +77,10 @@ class Serviciogascomponente extends Component
         
         $this->modalRegistrarBombonas = false;
     }
+
+    public function seguir()
+    {
+        return redirect()->route('familias');
+    }
    
 }
