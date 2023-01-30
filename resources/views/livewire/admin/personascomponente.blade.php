@@ -54,15 +54,6 @@
                         <div class="flex items-center">J. Familia</div>
                     </th>
                     <th class="px-4 py-2">
-                        <div class="flex items-center">CNE</div>
-                    </th>
-                    <th class="px-4 py-2">
-                        <div class="flex items-center">P. IVSS</div>
-                    </th>
-                    <th class="px-4 py-2">
-                        <div class="flex items-center">R. IVSS</div>
-                    </th>
-                    <th class="px-4 py-2">
                         <div class="flex items-center">User</div>
                     </th>
                     <th class="px-4 py-2">
@@ -102,33 +93,6 @@
                         <td class="px-4 py-2 text-center">
                             <div class="flex item-center">
                                 @if ($persona->jefedefamilia == 1)
-                                    <span class="bg-green-200 text-green-700 py-1 px-3 rounded-full text-xs">Si</span>
-                                @else
-                                    <span class="bg-red-200 text-red-700 py-1 px-3 rounded-full text-xs">No</span>
-                                @endif
-                            </div>
-                        </td>
-                        <td class="px-4 py-2 text-center">
-                            <div class="flex item-center">
-                                @if ($persona->cne->inscrito == 'SI')
-                                    <span class="bg-green-200 text-green-700 py-1 px-3 rounded-full text-xs">Si</span>
-                                @else
-                                    <span class="bg-red-200 text-red-700 py-1 px-3 rounded-full text-xs">No</span>
-                                @endif
-                            </div>
-                        </td>
-                        <td class="px-4 py-2 text-center">
-                            <div class="flex item-center">
-                                @if ($persona->ivss->pension == 'SI')
-                                    <span class="bg-green-200 text-green-700 py-1 px-3 rounded-full text-xs">Si</span>
-                                @else
-                                    <span class="bg-red-200 text-red-700 py-1 px-3 rounded-full text-xs">No</span>
-                                @endif
-                            </div>
-                        </td>
-                        <td class="px-4 py-2 text-center">
-                            <div class="flex item-center">
-                                @if ($persona->ivss->ivss == 'SI')
                                     <span class="bg-green-200 text-green-700 py-1 px-3 rounded-full text-xs">Si</span>
                                 @else
                                     <span class="bg-red-200 text-red-700 py-1 px-3 rounded-full text-xs">No</span>
