@@ -18,4 +18,9 @@ class Serviciogas extends Model
     {
         return $this->belongsTo(Familia::class);
     }
+
+    public function bombonas()
+    {
+        return $this->belongsTo(Detallegasfamilia::class);
+    }
 }

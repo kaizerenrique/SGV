@@ -43,7 +43,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('admin/nuevafamilia', funct
     return view('admin/nuevafamilia');
 })->name('nuevafamilia');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('admin/familiaserviciogas/{familia_id}', Serviciogascomponente::class)->name('familiaserviciogas');
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/familiaserviciogas/{familia}', Serviciogascomponente::class)->name('familiaserviciogas');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/direcciones', function () {
     return view('admin/direcciones');

@@ -11,6 +11,7 @@ use App\Models\Habitad;
 use App\Models\Familia;
 use App\Models\Persona;
 use App\Models\Tenencia;
+use App\Models\Serviciogas;
 
 class Nuevafamiliacomponente extends Component
 {
@@ -25,6 +26,9 @@ class Nuevafamiliacomponente extends Component
 
     public $familialistado = [];
     public $integrante;
+
+    //servicio de gas
+    public $gas_directo, $bombonas_gas;
 
     //barra de busqueda
     public $buscar;
@@ -64,7 +68,9 @@ class Nuevafamiliacomponente extends Component
             'clap' => 'required', 
             'direccion' => 'required', 
             'habitad' => 'required',
-            'tipodetenencia' => 'required'
+            'tipodetenencia' => 'required',
+            'gas_directo' => 'required',
+            'bombonas_gas' => 'required',
         ]);
 
         $this->codigo = uniqid('Familia-');
@@ -77,6 +83,11 @@ class Nuevafamiliacomponente extends Component
         $familia->habitad_id = $this->habitad;
         $familia->user_id = auth()->user()->id;
         $familia->save();
+
+        $familia->serviciogas()->create([
+            'gas_directo' => $this->gas_directo,
+            'bombonas_gas' => $this->bombonas_gas,
+        ]);
 
         $tenencia = new Tenencia();
         $tenencia->tipodetenencia = $this->tipodetenencia;
@@ -118,6 +129,7 @@ class Nuevafamiliacomponente extends Component
         $familia = Familia::where('codigo', $this->codigo)->get();   
         foreach ($familia as $famil) {
             $idfamilia = $famil->id;
+            $code = $famil->codigo;
         } 
 
         $integran = Persona::where('familia_id', $idfamilia)->count();        
@@ -131,10 +143,20 @@ class Nuevafamiliacomponente extends Component
             $famil->status = 'Completado';            
             $famil->save();
         }
-        
-        return redirect()->route('familiaserviciogas', $idfamilia);        
 
-        //return redirect()->route('familias');
+        $tieneregistro = Serviciogas::where('familia_id', $idfamilia)->count();
+
+        if ($tieneregistro == 1) {
+            $tiene_bombonas = Serviciogas::where('familia_id', $idfamilia)->get();
+            foreach ($tiene_bombonas as $bombona) {
+                $resultado = $bombona->bombonas_gas;
+            } 
+            if ($resultado == 1) {
+                return redirect()->route('familiaserviciogas', $code);
+            }else{
+                return redirect()->route('familias');
+            }            
+        }
     }
     
 

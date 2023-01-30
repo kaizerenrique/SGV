@@ -65,7 +65,7 @@
                 <x-jet-input-error for="habitad" class="mt-2" />
             </div>
 
-            <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-4">
+            <div class="col-span-2 sm:col-span-2 md:col-span-2">
                 <x-jet-label for="tenencia" value="{{ __('Forma de Tenencia') }}" />
                 <select name="tipodetenencia" id="tipodetenencia" wire:model.defer="tipodetenencia" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light"> 
                     <option value="" selected>Forma de Tenencia</option>                                                                         
@@ -81,13 +81,34 @@
             </div>
 
             <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="gas_directo" value="{{ __('¿Tiene servicio de gas directo?') }}" />
+                <select name="gas_directo" id="gas_directo" wire:model.defer="gas_directo"
+                    class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light">
+                    <option value="" selected>Seleccione</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
+                <x-jet-input-error for="gas_directo" class="mt-2" />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <x-jet-label for="bombonas_gas" value="{{ __('¿Posee Bombonas de Gas?') }}" />
+                <select name="bombonas_gas" id="bombonas_gas" wire:model.defer="bombonas_gas"
+                    class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light">
+                    <option value="" selected>Seleccione</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
+                <x-jet-input-error for="bombonas_gas" class="mt-2" />
+            </div>
+
+            <div class="col-span-2 sm:col-span-1">
                 <x-jet-label for="name" value="{{ __('Código') }}" />
                 <x-jet-input id="codigo" type="text" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light" wire:model.defer="codigo" disabled/>
                 <x-jet-input-error for="codigo" class="mt-2" />
             </div>
 
-            <div class="col-span-2 sm:col-span-2 pt-4">
-                <button type="button" class="focus:outline-none text-white text-base py-2.5 px-5 rounded-md bg-blue-400 hover:bg-blue-600 hover:shadow-lg flex items-center"
+            <div class="col-span-2 sm:col-span-2 pt-6">
+                <button type="button" class="focus:outline-none text-white text-base py-1.5 px-3 rounded-md bg-blue-400 hover:bg-blue-600 hover:shadow-lg flex items-center"
                     wire:click="registrar" wire:loading.attr="disabled">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 mr-2">
@@ -231,14 +252,25 @@
     </x-jet-dialog-modal>
 
     <div class="mt-4 px-4"> 
-        <x-jet-secondary-button wire:click="listadepersonas" wire:loading.attr="disabled">
-            {{ __('Agregar Personas') }}
-        </x-jet-secondary-button>
-        <x-jet-secondary-button wire:click="statusfamilia" wire:loading.attr="disabled">
-            {{ __('Aceptar') }}
-        </x-jet-secondary-button>
+        <div class="grid grid-cols-2 sm:grid-cols-2">
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-secondary-button wire:click="listadepersonas" wire:loading.attr="disabled">
+                    {{ __('Agregar Personas') }}
+                </x-jet-secondary-button>
+            </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <button type="button" class="focus:outline-none text-white text-base py-1.5 px-2 rounded-md bg-blue-400 hover:bg-blue-600 hover:shadow-lg flex items-center"
+                    wire:click="statusfamilia" wire:loading.attr="disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                    {{ __('Seguir') }}
+                </button>
+            </div>
+        </div>
         
-    </div>
-
-    
+    </div>    
 </div>
+
+  

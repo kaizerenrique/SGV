@@ -52,4 +52,10 @@ class Familia extends Model
     {
         return $this->hasOne(Serviciogas::class);
     }
+
+    public function bombonas()
+    {
+        return $this->hasMany(Detallegasfamilia::class);
+    }
+
 }
