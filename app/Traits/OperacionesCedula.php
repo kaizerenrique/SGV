@@ -26,7 +26,7 @@ trait OperacionesCedula {
                         $m = date("m", $fechaEntera);
                         $d = date("d", $fechaEntera);
                         
-                        $info2 = $conCedulaCne->ivssPension($nac, $ci, $d, $m, $y);
+                        $info2 = $conCedulaCne->ivssPension($nac, $ci, $d, $m, $y);                                               
                         $info3 = $conCedulaCne->cuentaIndividual($nac, $ci, $d, $m, $y);   
             
                         $info = [
@@ -68,7 +68,7 @@ trait OperacionesCedula {
                     }
                 }
             } else {
-                $info = false;
+                $info = 'no cne';
             }
             
         }    

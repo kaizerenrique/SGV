@@ -75,6 +75,14 @@ class Personascomponente extends Component
             $this->titulo = "¡Alerta!";
             $this->mensaje = "El numero de cedula ingresado ya se encuentra registrado.";
             $this->modalMensaje = true;
+        } elseif ($info == 'no cne'){
+            $this->nac = $this->nac;
+            $this->cedula = $this->ci;            
+            $this->fecha_nacimiento = $this->fecha_nacimiento;
+            $this->inscrito = 'NO';
+            $this->pension = 'NO';
+            $this->ivss = 'NO';
+            $this->modalPersona = true;
         } else {
             $this->modalCedula = false;
         
@@ -110,7 +118,7 @@ class Personascomponente extends Component
             'nombres' => 'required',
             'apellidos' => 'required',
             'fecha_nacimiento' => 'nullable|date',
-            'sexo' => 'nullable',
+            'sexo' => 'required',
             'status' => 'nullable',
             'jefedefamilia' => 'nullable',
             'inscrito' => 'nullable',
@@ -127,39 +135,76 @@ class Personascomponente extends Component
 
         ]);
 
-        $persona = Persona::create([
-            'nacionalidad' => $resul['nac'],
-            'cedula' => $resul['cedula'],
-            'nombres' => $resul['nombres'],
-            'apellidos' => $resul['apellidos'],
-            'fnacimiento' => $resul['fecha_nacimiento'],
-            'sexo' => $resul['sexo'],
-            'status' => $resul['status'],
-            'jefedefamilia' => $resul['jefedefamilia'],
-        ]);
         
-        $cne = $persona->cne()->create([
-            'inscrito' => $resul['inscrito'],
-            'cvestado' => $resul['cvestado'],
-            'cvmunicipio' => $resul['cvmunicipio'],
-            'cvparroquia' => $resul['cvparroquia'],
-            'centro' => $resul['centro'],
-            'direccion' => $resul['direccion']
-        ]);
 
-        $ivss = $persona->ivss()->create([
-            'pension' => $resul['pension'],
-            'ivss' => $resul['ivss']
-        ]);
-
-        if (!empty($resul['nrotelefono'])) {
-            $telefono = $persona->telefono()->create([
-                'codigo_internacional' => '58',
-                'codigo_operador' => $resul['codigo_operador'],
-                'nrotelefono' => $resul['nrotelefono'],
-                'whatsapp' => $resul['whatsapp'],
+        if ($resul['inscrito'] == 'NO') {
+            $persona = Persona::create([
+                'nacionalidad' => $resul['nac'],
+                'cedula' => $resul['cedula'],
+                'nombres' => $resul['nombres'],
+                'apellidos' => $resul['apellidos'],
+                'fnacimiento' => $resul['fecha_nacimiento'],
+                'sexo' => $resul['sexo'],
+                'status' => $resul['status'],
+                'jefedefamilia' => $resul['jefedefamilia'],
             ]);
-        }  
+            
+            $cne = $persona->cne()->create([
+                'inscrito' => $resul['inscrito']
+            ]);
+
+            $ivss = $persona->ivss()->create([
+                'pension' => $resul['pension'],
+                'ivss' => $resul['ivss']
+            ]);
+    
+            if (!empty($resul['nrotelefono'])) {
+                $telefono = $persona->telefono()->create([
+                    'codigo_internacional' => '58',
+                    'codigo_operador' => $resul['codigo_operador'],
+                    'nrotelefono' => $resul['nrotelefono'],
+                    'whatsapp' => $resul['whatsapp'],
+                ]);
+            }  
+            
+        } else {
+            $persona = Persona::create([
+                'nacionalidad' => $resul['nac'],
+                'cedula' => $resul['cedula'],
+                'nombres' => $resul['nombres'],
+                'apellidos' => $resul['apellidos'],
+                'fnacimiento' => $resul['fecha_nacimiento'],
+                'sexo' => $resul['sexo'],
+                'status' => $resul['status'],
+                'jefedefamilia' => $resul['jefedefamilia'],
+            ]);
+            
+            $cne = $persona->cne()->create([
+                'inscrito' => $resul['inscrito'],
+                'cvestado' => $resul['cvestado'],
+                'cvmunicipio' => $resul['cvmunicipio'],
+                'cvparroquia' => $resul['cvparroquia'],
+                'centro' => $resul['centro'],
+                'direccion' => $resul['direccion']
+            ]);
+    
+            $ivss = $persona->ivss()->create([
+                'pension' => $resul['pension'],
+                'ivss' => $resul['ivss']
+            ]);
+    
+            if (!empty($resul['nrotelefono'])) {
+                $telefono = $persona->telefono()->create([
+                    'codigo_internacional' => '58',
+                    'codigo_operador' => $resul['codigo_operador'],
+                    'nrotelefono' => $resul['nrotelefono'],
+                    'whatsapp' => $resul['whatsapp'],
+                ]);
+            }  
+        }
+        
+
+        
         $this->modalPersona = false; 
         
         $persona_id = $persona->id;
