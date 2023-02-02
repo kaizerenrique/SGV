@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('familia_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
                     ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
-                    ->onDelete('SET NULL')
+                    ->onDelete('cascade')
                     ->onUpdate('cascade');
             $table->foreignId('habitad_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
