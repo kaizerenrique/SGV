@@ -45,6 +45,10 @@ class Personascomponente extends Component
     public $titulo , $mensaje;
     public $modalNuevoUser = false;
 
+    //menor sin cedula
+    public $modalMenor = false;
+    public $modalMenordatos = false;
+
     // seccion para agregar persona    
     public function agregarpersona()
     {
@@ -227,6 +231,7 @@ class Personascomponente extends Component
         $this->reset(['rol']);
         $this->modalNuevoUser = true;
     }
+
     public function agregaruser()
     {
         $this->validate([
@@ -268,6 +273,63 @@ class Personascomponente extends Component
             $this->mensaje = 'Usuario registrado correctamente pero correo no enviado, error en envió de correo. ';
             $this->modalMensaje = true;
         }
+    }
+
+    public function registrarmenorsincedula()
+    {
+        //generar identificador para menor de edad sin cedula
+        do {
+            $numero_aleatorio = rand(1,9999999);
+            $msc = 'MSC-'.$numero_aleatorio;    
+        } while (Persona::where('cedula', $msc)->exists());
+
+        $this->ci = $msc;
+        $this->reset(['nac']);
+        $this->reset(['fecha_nacimiento']);
+
+        $this->modalMenor = true;
+    }
+
+    public function menordeedad()
+    {
+        $this->modalMenor = false;
+
+        $this->validate([
+            'nac' => 'required',
+            'ci' => 'required',
+            'fecha_nacimiento' => 'required|date'
+        ]);
+
+        $this->nac = $this->nac;
+        $this->ci = $this->ci;            
+        $this->fecha_nacimiento = $this->fecha_nacimiento;
+
+        $this->modalMenordatos = true;
+    }
+
+    public function guardarmenor()
+    {
+        $this->validate([
+            'nac' => 'required',
+            'ci' => 'required',
+            'fecha_nacimiento' => 'required|date',
+            'sexo' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'status' => 'nullable',
+        ]);
+
+        $persona = Persona::create([
+            'nacionalidad' => $this->nac,
+            'cedula' => $this->ci,
+            'nombres' => $this->nombres,
+            'apellidos' => $this->apellidos,
+            'fnacimiento' => $this->fecha_nacimiento,
+            'sexo' => $this->sexo,
+            'status' => $this->status
+        ]);
+        
+        $this->modalMenordatos = false;
     }
 
     //componentes para la tabla de personas

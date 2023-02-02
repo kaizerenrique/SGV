@@ -7,18 +7,33 @@
                     <span class="mx-6 bg-yellow-200 text-yellow-700 py-1 px-3 rounded-full text-base">{{$personasnumero}}</span>
                 </div>
             </div>
-            <div class="mr-2">
-                <button type="button"
-                    class="focus:outline-none text-white text-base py-2.5 px-5 rounded-md bg-blue-400 hover:bg-blue-600 hover:shadow-lg flex items-center"
-                    wire:click="agregarpersona">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6 mr-2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-                    </svg>
-                    {{ __('Registrar Persona') }}
-                </button>
+            <div class="">
+                <div class="mr-2">
+                    <button type="button"
+                        class="focus:outline-none text-white text-base py-2.5 px-5 rounded-md bg-blue-400 hover:bg-blue-600 hover:shadow-lg flex items-center"
+                        wire:click="registrarmenorsincedula">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="w-6 h-6 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                        </svg>
+                        {{ __('Registrar ') }}
+                    </button>
+                </div>
+                <div class="mr-2 mt-4">                
+                    <button type="button"
+                        class="focus:outline-none text-white text-base py-2.5 px-5 rounded-md bg-blue-400 hover:bg-blue-600 hover:shadow-lg flex items-center"
+                        wire:click="agregarpersona">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                        </svg>
+                        {{ __('Registrar Persona') }}
+                    </button>
+                </div>
             </div>
+            
         </div>
     </div>
 
@@ -353,4 +368,109 @@
         </x-slot>
     </x-jet-dialog-modal>
     <!-- Fin del Modal para usuario -->
+
+
+
+    <!-- Inicio del Modal para menor -->
+    <x-jet-dialog-modal wire:model="modalMenor">
+        <x-slot name="title">
+            {{ __('Registro') }}
+        </x-slot>
+        <x-slot name="content">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">
+                <div class="col-span-2 sm:col-span-4">
+                    <x-jet-label for="nacionalidad" value="{{ __('Nacionalidad') }}" />
+                    <select name="nac" id="nac" wire:model.defer="nac" class="mt-1 block w-full">
+                        <option value="" selected>Selecciona la Nacionalidad</option>
+                        <option value="V">Venezolano</option>
+                        <option value="E">Extranjero</option>
+                    </select>
+                    <x-jet-input-error for="nac" class="mt-2" />
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="ci" value="{{ __('Numero de Cedula') }}" />
+                    <x-jet-input id="ci" type="text" class="mt-1 block w-full"
+                        wire:model.defer="ci" disabled/>
+                    <x-jet-input-error for="ci" class="mt-2" />
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
+                    <x-jet-input id="fecha_nacimiento" type="date" class="mt-1 block w-full"
+                        wire:model.defer="fecha_nacimiento" />
+                    <x-jet-input-error for="fecha_nacimiento" class="mt-2" />
+                </div>
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalMenor', false)" wire:loading.attr="disabled">
+                {{ __('Cerrar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button class="ml-3" wire:click="menordeedad()" wire:loading.attr="disabled">
+                {{ __('Guardar') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Fin del Modal para menor -->
+    <!-- Inicio del Modal para menor -->
+    <x-jet-dialog-modal wire:model="modalMenordatos">
+        <x-slot name="title">
+            {{ __('Registro') }}
+        </x-slot>
+        <x-slot name="content">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-600">
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="nac" value="{{ __('Nacionalidad') }}" />
+                    <x-jet-input id="nac" name="nac" type="text" class="mt-1 block w-full"
+                        wire:model.defer="nac" disabled />
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="ci" value="{{ __('Numero de Cedula') }}" />
+                    <x-jet-input id="ci" type="text" class="mt-1 block w-full"
+                        wire:model.defer="ci" disabled/>
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
+                    <x-jet-input id="fecha_nacimiento" type="date" class="mt-1 block w-full"
+                        wire:model.defer="fecha_nacimiento" disabled />
+                </div>
+                <div class="col-span-2 sm:col-span-2">
+                    <x-jet-label for="campsexo" value="{{ __('Sexo') }}" />
+                    <select name="sexo" id="sexo" wire:model.defer="sexo" class="mt-1 block w-full">
+                        <option value="" selected>Selecciona el Sexo</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                    </select>
+                    <x-jet-input-error for="sexo" class="mt-2" />
+                </div>
+                <div class="col-span-2 sm:col-span-4">
+                    <x-jet-label for="name" value="{{ __('Nombre') }}" />
+                    <x-jet-input id="nombres" type="text" class="mt-1 block w-full"
+                        wire:model.defer="nombres" />
+                    <x-jet-input-error for="nombres" class="mt-2" />
+                </div>
+                <div class="col-span-2 sm:col-span-4">
+                    <x-jet-label for="apellido" value="{{ __('Apellido') }}" />
+                    <x-jet-input id="apellidos" type="text" class="mt-1 block w-full"
+                        wire:model.defer="apellidos" />
+                    <x-jet-input-error for="apellidos" class="mt-2" />
+                </div>
+                <div class="col-span-2">
+                    <x-jet-label for="status" value="{{ __('Estatus') }}" />
+                    <x-jet-input id="status" type="checkbox" class="mt-1 mr-2" wire:model.defer="status" />
+                    Seleccionar en caso de estatus activo
+                </div>
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalMenordatos', false)" wire:loading.attr="disabled">
+                {{ __('Cerrar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button class="ml-3" wire:click="guardarmenor()" wire:loading.attr="disabled">
+                {{ __('Guardar') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Fin del Modal para menor -->
 </div>
