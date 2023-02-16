@@ -30,6 +30,16 @@ class Habitadcomponente extends Component
     public $modalMensaje = false;
     public $titulo , $mensaje;
 
+    protected $listeners = [
+        'set:latitud-longitud' => 'setLatitudLongitud'
+    ];
+
+    public function setLatitudLongitud($latitud, $longitud) 
+    {
+        $this->latitud = $latitud;
+        $this->longitud = $longitud;
+    }
+
     public function mount()
     {
         $this->comunales = ConsejoComunal::all();
@@ -49,8 +59,8 @@ class Habitadcomponente extends Component
         $this->reset(['literal']);
         $this->reset(['tipo']);
         $this->reset(['observacion']);
-        $this->reset(['latitud']);
-        $this->reset(['longitud']);
+        //$this->reset(['latitud']);
+        //$this->reset(['longitud']);
         $this->reset(['tanquedeagua']);
         $this->reset(['capacidad']);
         $this->modalhabitad = true;
