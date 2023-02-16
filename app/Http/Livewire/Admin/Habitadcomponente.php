@@ -59,8 +59,6 @@ class Habitadcomponente extends Component
         $this->reset(['literal']);
         $this->reset(['tipo']);
         $this->reset(['observacion']);
-        //$this->reset(['latitud']);
-        //$this->reset(['longitud']);
         $this->reset(['tanquedeagua']);
         $this->reset(['capacidad']);
         $this->modalhabitad = true;
