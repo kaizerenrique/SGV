@@ -58,4 +58,9 @@ class Familia extends Model
         return $this->hasMany(Detallegasfamilia::class);
     }
 
+    public function cantv()
+    {
+        return $this->hasMany(Serviciocantvtelefono::class);
+    }
+
 }

@@ -83,7 +83,7 @@ class Personasdatoscomponente extends Component
         'codigo' => 'nullable|string|min:8|max:12|unique:carnetdelapatrias',
         'serial' => 'nullable|string|min:8|max:12|unique:carnetdelapatrias',
         'hogarespatria' => 'required',
-        'integrantes' => 'nullable|string|digits_between:1,2',
+        'integrantes' => 'nullable|string|in:1 Integrante,2 Integrante,3 Integrante,4 Integrante,5 Integrante,Más de 6 Integrante',
         'partohumanizado' => 'nullable',
         'lactanciamaterna' => 'nullable',
         'mjgh' => 'nullable',

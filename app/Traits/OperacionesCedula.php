@@ -47,7 +47,6 @@ trait OperacionesCedula {
                             'pension' => $info2['pensionado'],
                             'ivss' => $info3['registrado']
                         ];
-        
                     } else {
                         $info = [
                             'persona' => [

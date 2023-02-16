@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('educacions', function (Blueprint $table) {
+        Schema::create('serviciocantvtelefonos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id') // UNSIGNED BIG INT
+            $table->foreignId('familia_id') // UNSIGNED BIG INT
                     ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
                     ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            
-            $table->string('gradodeintruccion')->nullable();
-            $table->boolean('estudia')->nullable();
+            $table->boolean('posee_servicio')->nullable();
+            $table->string('codigo_operador')->nullable();
+            $table->string('nrotelefono')->nullable();
+            $table->boolean('estado')->nullable();
+
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('educacions');
+        Schema::dropIfExists('serviciocantvtelefonos');
     }
 };

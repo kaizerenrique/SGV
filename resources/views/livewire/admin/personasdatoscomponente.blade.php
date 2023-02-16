@@ -55,7 +55,15 @@
                                     @if (!empty($estado))
                                         <div class="col-span-2 sm:col-span-2">
                                             <x-jet-label for="integrantes" value="{{ __('Cantidad de Integrantes') }}" />
-                                            <x-jet-input id="integrantes" type="text" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light" wire:model.defer="integrantes" />
+                                            <select name="integrantes" id="integrantes" wire:model.defer="integrantes" class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light"> 
+                                                <option value="" selected>Indique el Número de integrantes</option>                                                                         
+                                                <option value="1 Integrante">1 Integrante</option>
+                                                <option value="2 Integrante">2 Integrante</option>
+                                                <option value="3 Integrante">3 Integrante</option>
+                                                <option value="4 Integrante">4 Integrante</option>
+                                                <option value="5 Integrante">5 Integrante</option>
+                                                <option value="Más de 6 Integrante ">Más de 6 Integrante</option>
+                                            </select> 
                                             <x-jet-input-error for="integrantes" class="mt-2" />
                                         </div>
                                     @endif                            
