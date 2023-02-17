@@ -8,12 +8,13 @@ use App\Models\Familia;
 use App\Models\Serviciogas;
 use App\Models\Proveedoresdeservicios;
 use App\Models\Detallegasfamilia;
+use App\Models\Serviciocantvtelefono;
 
 class Serviciogascomponente extends Component
 {
     use WithPagination;
 
-    public $familia, $identificador;
+    public $familia, $identificador, $idfamilia;
 
     public $regbombona;
     public $modalRegistrarBombonas = false;
@@ -29,17 +30,17 @@ class Serviciogascomponente extends Component
         $codigo = $this->familia;
         $familia = Familia::where('codigo',$codigo)->get();
         foreach ($familia as $famil) {
-            $idfamilia = $famil->id;
+            $this->idfamilia = $famil->id;
         } 
         //informacion del servicio
-        $serviciogas = Serviciogas::where('familia_id', $idfamilia)->get();
+        $serviciogas = Serviciogas::where('familia_id', $this->idfamilia)->get();
         foreach ($serviciogas as $servicio) {
             $idserviciogas = $servicio->id;
         }
         //proveedor del servicio
         $prestadordeservicios = Proveedoresdeservicios::where('servicio_id', 1)->get();
         
-        $resul = Familia::find($idfamilia);
+        $resul = Familia::find($this->idfamilia);
         $this->identificador = $resul;
         $bombonas = $resul->bombonas()->orderBy('id','desc')->paginate(10);
 
@@ -80,7 +81,24 @@ class Serviciogascomponente extends Component
 
     public function seguir()
     {
-        return redirect()->route('familias');
+        
+        $tieneregistro = Serviciocantvtelefono::where('familia_id', $this->idfamilia)->count();
+                
+        if ($tieneregistro == 1) {      
+            $tienecantv = Serviciocantvtelefono::where('familia_id', $this->idfamilia)->get();
+            foreach ($tienecantv as $cantv) {
+                $resultado = $cantv->posee_servicio;
+            } 
+
+            if ($resultado == 1) {
+                return redirect()->route('familiaserviciocantv', $this->familia);  
+            } else {
+                return redirect()->route('familias');
+            }     
+        } else{
+            return redirect()->route('familias');
+        }
+        
     }
    
 }

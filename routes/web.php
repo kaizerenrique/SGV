@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\Cantvcomponente;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Personasdatoscomponente;
 use App\Http\Livewire\Admin\Serviciogascomponente;
@@ -44,6 +45,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('admin/nuevafamilia', funct
 })->name('nuevafamilia');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/familiaserviciogas/{familia}', Serviciogascomponente::class)->name('familiaserviciogas');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('admin/cantvserviciogas/{familia}', Cantvcomponente::class)->name('familiaserviciocantv');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('admin/direcciones', function () {
     return view('admin/direcciones');

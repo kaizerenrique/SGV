@@ -31,6 +31,9 @@ class Nuevafamiliacomponente extends Component
     //servicio de gas
     public $gas_directo, $bombonas_gas;
 
+    //servicio de cantv
+    public $cantv;
+
     //barra de busqueda
     public $buscar;
 
@@ -72,6 +75,7 @@ class Nuevafamiliacomponente extends Component
             'tipodetenencia' => 'required',
             'gas_directo' => 'required',
             'bombonas_gas' => 'required',
+            'cantv' => 'required'
         ]);
 
         $this->codigo = uniqid('Familia-');
@@ -88,6 +92,10 @@ class Nuevafamiliacomponente extends Component
         $familia->serviciogas()->create([
             'gas_directo' => $this->gas_directo,
             'bombonas_gas' => $this->bombonas_gas,
+        ]);
+
+        $familia->cantv()->create([
+            'posee_servicio' => $this->cantv
         ]);
 
         $tenencia = new Tenencia();
@@ -154,7 +162,9 @@ class Nuevafamiliacomponente extends Component
             } 
             if ($resultado == 1) {
                 return redirect()->route('familiaserviciogas', $code);
-            }else{
+            }elseif($resultado == 0){
+                return redirect()->route('familiaserviciocantv', $code); 
+            } else{
                 return redirect()->route('familias');
             }            
         }

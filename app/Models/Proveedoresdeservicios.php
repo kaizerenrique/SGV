@@ -11,6 +11,7 @@ class Proveedoresdeservicios extends Model
 
     protected $fillable = [
         'nombre',
+        'servicio_id',
     ];
 
     public function servicios()

@@ -106,7 +106,6 @@ class Personasdatoscomponente extends Component
     public function guardardatos()
     {
         $info = $this->validate();
-        //dd($info);
 
         $persona = Persona::find($this->persona_id);
 
@@ -131,22 +130,24 @@ class Personasdatoscomponente extends Component
             'condicionlaboral' => $info['condicionlaboral'],
         ]);
 
-        $discapacidad = $persona->discapacidad()->create([
-            'discapacidad' => $info['discapacidad'],
-            'carnetdiscapacidad' => $info['carnetdiscapacidad'],
-            'codigocarnetdiscapacidad' => $info['codigocarnetdiscapacidad'],
-        ]);
-
-        $salud = $persona->salud()->create([
-            'gestacion' => $info['gestacion'],
-            'esterilizacion' => $info['esterilizacion'],
-            'enfermedadcronica' => $info['enfermedadcronica'],
-            'atencionmedica' => $info['atencionmedica'],
-            'quirurgica' => $info['quirurgica'],
-            'tipoquirurgica' => $info['tipoquirurgica'],
-        ]);
-
+        if (!empty($info['discapacidad'])) {
+            $discapacidad = $persona->discapacidad()->create([
+                'discapacidad' => $info['discapacidad'],
+                'carnetdiscapacidad' => $info['carnetdiscapacidad'],
+                'codigocarnetdiscapacidad' => $info['codigocarnetdiscapacidad'],
+            ]);
+        } 
+            
+            $salud = $persona->salud()->create([
+                'gestacion' => $info['gestacion'],
+                'esterilizacion' => $info['esterilizacion'],
+                'enfermedadcronica' => $info['enfermedadcronica'],
+                'atencionmedica' => $info['atencionmedica'],
+                'quirurgica' => $info['quirurgica'],
+                'tipoquirurgica' => $info['tipoquirurgica'],
+            ]);
         
+
         $this->titulo = '¡Alerta!';
         $this->mensaje = 'Registro Exitoso';
         $this->modalMensaje = true;

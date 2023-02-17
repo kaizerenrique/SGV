@@ -358,6 +358,11 @@ class Personascomponente extends Component
         ]);
     }
 
+    public function eliminarpersona(Persona $persona )
+    {
+        $persona->delete(); 
+    }
+
     //Actualizar tabla para corregir falla de busqueda
     public function updatingBuscar()
     {

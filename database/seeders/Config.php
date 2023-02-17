@@ -13,6 +13,8 @@ use App\Models\Comuna;
 use App\Models\ConsejoComunal;
 use App\Models\Clap;
 use App\Models\Direccion;
+use App\Models\Servicios;
+use App\Models\Proveedoresdeservicios;
 use Illuminate\Support\Str;
 use File;
 
@@ -130,6 +132,23 @@ class Config extends Seeder
                 'longitud' => $obj->longitud
             ));
         };
-        
+
+        $json7 = File::get("database/data/07_servicios.json");
+        $data = json_decode($json7);
+        foreach ($data as $obj) {
+            Servicios::create(array(
+                'servicio' => $obj->servicio,
+                'descrip' => $obj->descrip
+            ));
+        };        
+
+        $json8 = File::get("database/data/08_proveedoresdeservicio.json");
+        $data = json_decode($json8);
+        foreach ($data as $obj) {
+            Proveedoresdeservicios::create(array(
+                'nombre' => $obj->nombre,
+                'servicio_id' => $obj->servicio_id
+            ));
+        };
     }
 }

@@ -90,7 +90,7 @@
                 </select>
                 <x-jet-input-error for="gas_directo" class="mt-2" />
             </div>
-            <div class="col-span-2 sm:col-span-1">
+            <div class="col-span-2 sm:col-span-2">
                 <x-jet-label for="bombonas_gas" value="{{ __('¿Posee Bombonas de Gas?') }}" />
                 <select name="bombonas_gas" id="bombonas_gas" wire:model.defer="bombonas_gas"
                     class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light">
@@ -99,6 +99,17 @@
                     <option value="0">No</option>
                 </select>
                 <x-jet-input-error for="bombonas_gas" class="mt-2" />
+            </div>
+
+            <div class="col-span-2 sm:col-span-2">
+                <x-jet-label for="cantv" value="{{ __('¿Tiene servicio de Cantv?') }}" />
+                <select name="cantv" id="cantv" wire:model.defer="cantv"
+                    class="mt-1 block w-full border border-solid border-gray-300 rounded-lg text-gray-600 text-sm font-light">
+                    <option value="" selected>Seleccione</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
+                <x-jet-input-error for="cantv" class="mt-2" />
             </div>
 
             <div class="col-span-2 sm:col-span-1">
